@@ -1,0 +1,54 @@
+{
+  "name": "morswap",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@apollo/client": "^3.11.4",
+    "@rainbow-me/rainbowkit": "^2.1.5",
+    "@tanstack/react-query": "^5.52.2",
+    "@testing-library/jest-dom": "^5.17.0",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^13.5.0",
+    "@uniswap/sdk-core": "^5.3.1",
+    "@uniswap/v3-periphery": "^1.4.4",
+    "@uniswap/v3-sdk": "^3.13.1",
+    "ethers": "^5.7.2",
+    "graphql": "^16.9.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-scripts": "^5.0.1",
+    "viem": "^2.20.1",
+    "wagmi": "^2.12.7",
+    "web-vitals": "^2.1.4",
+    "webpack": "^4.42.0"
+  },
+  "scripts": {
+    "start": "cross-env GENERATE_SOURCEMAP=false react-scripts start",
+   
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "cross-env": "^7.0.3",
+    "typescript": "^4.9.5"
+  }
+}

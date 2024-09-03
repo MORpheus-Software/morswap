@@ -1,0 +1,272 @@
+/* General Body Styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #2D2D2D; /* Dark background */
+  color: #fff;
+  font-family: Arial, sans-serif; /* Main font */
+}
+
+/* RainbowKit Customization */
+.rainbowkit-connect-button, 
+.rainbowkit-wallet-header, 
+.rainbowkit-wallet-list, 
+.rainbowkit-wallet-options, 
+.rainbowkit-modal {
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.rainbowkit-connect-button, 
+.rainbowkit-wallet-button {
+  background-color: #2D2D2D !important;
+  border: 2px solid #387a3a !important;
+  color: #4CAF50 !important;
+  border-radius: 5px !important;
+  font-weight: bold;
+}
+
+.App {
+  text-align: center;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 5vh;
+  padding-left: 2vw;
+  padding-right: 2vw;
+}
+
+.token-selector {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px; /* Adjust as needed */
+}
+
+.token-selector select {
+  /* Add any specific styles for the select element */
+}
+
+.token-selector span {
+  /* Add any specific styles for the balance span */
+}
+
+.token-selector {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 0px;
+  margin-top: 0px; /* Add some top margin to make room for the label */
+}
+
+.token-selector select {
+  background-color: #404040;
+  border: none;
+  color: #fff;
+  padding: 0px;
+  margin-right: 0px;
+  margin-top: 5px; 
+  border-radius: 5px;
+}
+
+.token-selector span {
+  color: #005306; 
+  font-size: 0.9rem;
+  text-align: left;
+  margin-right: 10px;
+  transform: translateX(-30%);
+}
+
+.header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 20px;
+}
+
+.logo {
+  display: flex;
+  flex-direction: row;
+}
+
+.swap-btn {
+  background: none;
+  border: 2px solid #fff;
+  color: #fff;
+  padding: 5px 10px;
+  cursor: pointer;
+  border-radius: 8px;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.Projects {
+  background: none;
+  border: 0px solid #fff;
+  color: #fff;
+  padding: 5px 10px;
+  cursor: pointer;
+  margin-left: 10px;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.wallet-button button {
+  background-color: #2D2D2D;
+  border: 2px solid #387a3a;
+  padding: 10px 20px;
+  color: #4CAF50;
+  cursor: pointer;
+  border-radius: 8px;
+  font-weight: bold; 
+}
+
+.swap-container {
+  background-color: #2D2D2D;
+  padding-top: 160px;
+  border-radius: 10px;
+  width: 350px;
+  text-align: center;
+}
+
+.swap-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 2px 0;
+}
+
+.swap-box {
+  position: relative;
+  background-color: #dfdfdf;
+  padding: 0px;
+  border-radius: 5px;
+  width: 160%;
+  height: 65px;
+  display: flex;
+  margin-bottom: 0px;
+  transform: translateX(0%);
+}
+
+/* Container for input and USD value */
+.input-container {
+  position: relative;
+  width: 100%;
+}
+
+/* Swap box input fields */
+.swap-box input {
+  font-family: 'Arial', Gadget, sans-serif;
+  font-size: 28px;
+  font-weight: bold;
+  background-color: #949494;
+  border: none;
+  color: #387a3a;
+  width: 50%;
+  height: 110%;
+  border-radius: 5px;
+  text-align: right;
+  margin-left: 189px;
+  border: none;
+  padding: 7.5px;
+  height: 50px;
+  position: relative;
+}
+
+/* USD value below input field */
+.usd-value {
+  font-size: 12px;
+  color: #b8b8b8; 
+  position: absolute;
+  bottom: -20px; /* Position below the input */
+  left: 22px;
+  transform: translateX(-5%);
+  width: 100%;
+  text-align: right;
+}
+
+/* Blur effect on loading text */
+.blur-text {
+  filter: blur(4px);
+}
+
+/* Original price display text */
+.price-display {
+  margin-top: 10px;
+  color: #ffffff; /* Keep the original color */
+}
+
+.swap-box input[type="number"]::-webkit-inner-spin-button,
+.swap-box input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.swap-box span {
+  margin-left: 25px; 
+  margin-top: 5px;
+  font-size: 10px;
+}
+
+.swap-box select {
+  background-color: #949494;
+  border: none;
+  color: #fff;
+  padding: 8px;
+  margin-left: 10px;
+  margin-bottom: 4px;
+  height: 50px;
+}
+
+.arrow {
+  font-size: 24px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  color: #387a3a;
+}
+
+.swap-main-button {
+  background-color: #387a3a;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-top: 20px;
+}
+
+.swap-tokens-button {
+  background-color: #387a3a;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  font-size: 24px; /* Increased font size for better visibility */
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 10px auto;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.swap-tokens-button:hover {
+  background-color: #2c5e2e;
+  transform: scale(1.1);
+}
+
+.swap-tokens-button:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(56, 122, 58, 0.5);
+}
+
+.input-label {
+  position: absolute;
+  top: 5px;
+  left: 10px;
+  font-size: 14px;
+  color: #387a3a;
+  font-weight: bold;
+}
