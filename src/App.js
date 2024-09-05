@@ -1,44 +1,31 @@
-import React, { useState, useEffect } from 'react';
-import { ethers, Contract } from 'ethers';
+import React, { useState, useEffect, useCallback } from 'react';
+import { useAccount, useWalletClient } from 'wagmi';
+import { ethers } from 'ethers';
 import { Token } from '@uniswap/sdk-core';
 import { computePoolAddress } from '@uniswap/v3-sdk';
 import IUniswapV3PoolABI from '@uniswap/v3-core/artifacts/contracts/interfaces/IUniswapV3Pool.sol/IUniswapV3Pool.json';
 import Quoter from '@uniswap/v3-periphery/artifacts/contracts/lens/Quoter.sol/Quoter.json';
 import './App.css';
+import { performSwap } from './swapService';
+import { useAddRecentTransaction } from '@rainbow-me/rainbowkit';
+import { ConnectButton } from '@rainbow-me/rainbowkit';
 
-import '@rainbow-me/rainbowkit/styles.css';
-import { getDefaultConfig, RainbowKitProvider, ConnectButton, darkTheme } from '@rainbow-me/rainbowkit';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { createConfig, WagmiConfig } from 'wagmi';
-import { mainnet, arbitrum } from 'wagmi/chains';
-import { createPublicClient, http } from 'viem';
 
-import { TOKEN_DATA } from './token_data'; // Import the token data
-
-const chains = [mainnet, arbitrum];
-const publicClient = createPublicClient({
-  chain: arbitrum,
-  transport: http(),
-});
-
-const config = getDefaultConfig({
-  appName: 'MorSwap',
-  projectId: 'YOUR_WALLET_CONNECT_PROJECT_ID',
-  chains,
-  publicClient,
-});
-
-const queryClient = new QueryClient();
+import { TOKEN_DATA } from './token_data';
 
 function App() {
   const [sellAmount, setSellAmount] = useState('');
   const [buyAmount, setBuyAmount] = useState('');
   const [priceInEth, setPriceInEth] = useState(null);
-  const [ethPriceInUSD, setEthPriceInUSD] = useState(null); 
+  const [ethPriceInUSD, setEthPriceInUSD] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [selectedSellToken, setSelectedSellToken] = useState(TOKEN_DATA['MOR']); // MOR by default
-  const [selectedBuyToken, setSelectedBuyToken] = useState(TOKEN_DATA['WETH']); // WETH by default
+  const [selectedSellToken, setSelectedSellToken] = useState(TOKEN_DATA['MOR']);
+  const [selectedBuyToken, setSelectedBuyToken] = useState(TOKEN_DATA['WETH']);
   const [activeInput, setActiveInput] = useState('sell');
+
+  const { address } = useAccount();
+  const { data: walletClient } = useWalletClient();
+  const addRecentTransaction = useAddRecentTransaction();
 
   const provider = new ethers.providers.JsonRpcProvider('https://arb1.arbitrum.io/rpc');
   const QUOTE_CONTRACT_ADDRESS = '0xb27308f9F90D607463bb33eA1BeBb41C27CE5AB6';
@@ -67,7 +54,7 @@ function App() {
         fee: 3000,
       });
 
-      const quoterContract = new Contract(QUOTE_CONTRACT_ADDRESS, Quoter.abi, provider);
+      const quoterContract = new ethers.Contract(QUOTE_CONTRACT_ADDRESS, Quoter.abi, provider);
       const quotedAmountOut = await quoterContract.callStatic.quoteExactInputSingle(
         ethToken.address,
         usdcToken.address,
@@ -90,12 +77,12 @@ function App() {
       const sellToken = new Token(42161, selectedSellToken.address, selectedSellToken.decimals, selectedSellToken.symbol, `${selectedSellToken.symbol} Token`);
       const buyToken = new Token(42161, selectedBuyToken.address, selectedBuyToken.decimals, selectedBuyToken.symbol, `${selectedBuyToken.symbol} Token`);
   
-      const quoterContract = new Contract(QUOTE_CONTRACT_ADDRESS, Quoter.abi, provider);
+      const quoterContract = new ethers.Contract(QUOTE_CONTRACT_ADDRESS, Quoter.abi, provider);
       
       let quotedAmountOut;
       if (direction === 'sell') {
         const parsedSellAmount = ethers.utils.parseUnits(sellAmount || '1', sellToken.decimals);
-        quotedAmountOut = await quoterContract.callStatic.quoteExactInputSingle(
+        quotedAmountOut = await quoterContract.quoteExactInputSingle.staticCall(
           sellToken.address,
           buyToken.address,
           3000,
@@ -107,7 +94,7 @@ function App() {
         setBuyAmount(price.toFixed(6));
       } else {
         const parsedBuyAmount = ethers.utils.parseUnits(buyAmount || '1', buyToken.decimals);
-        quotedAmountOut = await quoterContract.callStatic.quoteExactOutputSingle(
+        quotedAmountOut = await quoterContract.quoteExactOutputSingle.staticCall(
           sellToken.address,
           buyToken.address,
           3000,
@@ -121,6 +108,7 @@ function App() {
   
     } catch (error) {
       console.error('Error fetching price:', error);
+      // You might want to set an error state here to display to the user
     } finally {
       setLoading(false);
     }
@@ -147,7 +135,7 @@ function App() {
     }
   };
 
-  const calculateUsdValue = (amount, token) => {
+  const calculateUsdValue = useCallback((amount, token) => {
     if (!priceInEth || !ethPriceInUSD) return '0.00';
   
     let tokenPriceInUsd;
@@ -164,8 +152,7 @@ function App() {
     }
   
     return (amount * tokenPriceInUsd).toFixed(2);
-  };
-  
+  }, [priceInEth, ethPriceInUSD]);
 
   const handleSwapTokens = () => {
     setSelectedSellToken(selectedBuyToken);
@@ -178,113 +165,126 @@ function App() {
     }, 0);
   };
 
+  const handleSwap = async () => {
+    if (!address || !walletClient) {
+      alert('Please connect your wallet');
+      return;
+    }
+
+    try {
+      setLoading(true);
+      const amountIn = ethers.utils.parseUnits(sellAmount, selectedSellToken.decimals);
+      const receipt = await performSwap(walletClient, amountIn);
+
+      addRecentTransaction({
+        hash: receipt.transactionHash,
+        description: `Swap ${sellAmount} ${selectedSellToken.symbol} for ${buyAmount} ${selectedBuyToken.symbol}`,
+        confirmations: 1
+      });
+
+      alert('Swap successful!');
+    } catch (error) {
+      console.error('Swap failed:', error);
+      alert('Swap failed. See console for details.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
-    <WagmiConfig config={config}>
-      <QueryClientProvider client={queryClient}>
-        <RainbowKitProvider
-          theme={darkTheme({
-            accentColor: '#387a3a', // Green accent color to match swap button
-            accentColorForeground: 'white', // White text
-            borderRadius: 'small',
-            fontStack: 'system',
-          })}
-          modalSize="compact" // Compact modal size
-        >
-          <div className="container">
-            <div className="header">
-              <div className="logo">
-                <button className="swap-btn">Swap</button>
-                <button className="Projects">Projects: Coming Soon</button>
-              </div>
-              <div className="wallet-button">
-                <ConnectButton />
-              </div>
+    <div className="container">
+      <div className="header">
+        <div className="logo">
+          <button className="swap-btn">Swap</button>
+          <button className="Projects">Projects: Coming Soon</button>
+        </div>
+        <div className="wallet-button">
+          <ConnectButton />
+        </div>
+      </div>
+
+      <div className="swap-container">
+        <h1>MorSwap.org</h1>
+
+        <div className="swap-section">
+          <div className="input-label">Sell</div>
+          <div className="swap-box">
+            <div className="token-selector">
+              <select 
+                id="sellToken" 
+                value={selectedSellToken.symbol}
+                onChange={(e) => handleTokenChange(e, 'sell')}
+              >
+                {Object.keys(TOKEN_DATA).map((tokenSymbol) => (
+                  <option key={tokenSymbol} value={tokenSymbol}>
+                    {TOKEN_DATA[tokenSymbol].symbol}
+                  </option>
+                ))}
+              </select>
+              <span>Balance: 0.00</span>
             </div>
-
-            <div className="swap-container">
-              <h1>MorSwap.org</h1>
-
-              <div className="swap-section">
-                <div className="input-label">Sell</div>
-                <div className="swap-box">
-                  <div className="token-selector">
-                    <select 
-                      id="sellToken" 
-                      value={selectedSellToken.symbol}
-                      onChange={(e) => handleTokenChange(e, 'sell')}
-                    >
-                      {Object.keys(TOKEN_DATA).map((tokenSymbol) => (
-                        <option key={tokenSymbol} value={tokenSymbol}>
-                          {TOKEN_DATA[tokenSymbol].symbol}
-                        </option>
-                      ))}
-                    </select>
-                    <span>Balance: 0.00</span>
-                  </div>
-                  <div className="input-container">
-                    <input
-                      type="number"
-                      id="sellAmount"
-                      placeholder="0"
-                      value={sellAmount}
-                      onChange={handleSellInputChange}
-                    />
-                    <div className={`usd-value ${loading ? 'blur-text' : ''}`}>
-                      {loading ? '' : `$${calculateUsdValue(sellAmount, selectedSellToken)}`}
-                    </div>
-                  </div>
-                </div>
+            <div className="input-container">
+              <input
+                type="number"
+                id="sellAmount"
+                placeholder="0"
+                value={sellAmount}
+                onChange={handleSellInputChange}
+              />
+              <div className={`usd-value ${loading ? 'blur-text' : ''}`}>
+                {loading ? '' : `$${calculateUsdValue(sellAmount, selectedSellToken)}`}
               </div>
-
-              <button className="swap-tokens-button" onClick={handleSwapTokens}>
-                &#8645;
-              </button>
-
-              <div className="swap-section">
-                <div className="input-label">Buy</div>
-                <div className="swap-box">
-                  <div className="token-selector">
-                    <select 
-                      id="buyToken" 
-                      value={selectedBuyToken.symbol}
-                      onChange={(e) => handleTokenChange(e, 'buy')}
-                    >
-                      {Object.keys(TOKEN_DATA).map((tokenSymbol) => (
-                        <option key={tokenSymbol} value={tokenSymbol}>
-                          {TOKEN_DATA[tokenSymbol].symbol}
-                        </option>
-                      ))}
-                    </select>
-                    <span>Balance: 0.00</span>
-                  </div>
-                  <div className="input-container">
-                    <input
-                      type="number"
-                      id="buyAmount"
-                      placeholder="0"
-                      value={buyAmount}
-                      onChange={handleBuyInputChange}
-                    />
-                    <div className={`usd-value ${loading ? 'blur-text' : ''}`}>
-                      {loading ? '' : `$${calculateUsdValue(buyAmount, selectedBuyToken)}`}
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Below price display */}
-              <div className="price-display">
-                {loading
-                  ? 'Loading price...'
-                  : `1 ${selectedSellToken.symbol} = ${priceInEth ? parseFloat(priceInEth).toFixed(6) : 'N/A'} ${selectedBuyToken.symbol}`}
-              </div>
-
-              <button className="swap-main-button">Swap</button>
             </div>
           </div>
-        </RainbowKitProvider>
-      </QueryClientProvider>
-    </WagmiConfig>
+        </div>
+
+        <button className="swap-tokens-button" onClick={handleSwapTokens}>
+          &#8645;
+        </button>
+
+        <div className="swap-section">
+          <div className="input-label">Buy</div>
+          <div className="swap-box">
+            <div className="token-selector">
+              <select 
+                id="buyToken" 
+                value={selectedBuyToken.symbol}
+                onChange={(e) => handleTokenChange(e, 'buy')}
+              >
+                {Object.keys(TOKEN_DATA).map((tokenSymbol) => (
+                  <option key={tokenSymbol} value={tokenSymbol}>
+                    {TOKEN_DATA[tokenSymbol].symbol}
+                  </option>
+                ))}
+              </select>
+              <span>Balance: 0.00</span>
+            </div>
+            <div className="input-container">
+              <input
+                type="number"
+                id="buyAmount"
+                placeholder="0"
+                value={buyAmount}
+                onChange={handleBuyInputChange}
+              />
+              <div className={`usd-value ${loading ? 'blur-text' : ''}`}>
+                {loading ? '' : `$${calculateUsdValue(buyAmount, selectedBuyToken)}`}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="price-display">
+          {loading
+            ? 'Loading price...'
+            : `1 ${selectedSellToken.symbol} = ${priceInEth ? parseFloat(priceInEth).toFixed(6) : 'N/A'} ${selectedBuyToken.symbol}`}
+        </div>
+
+        <button className="swap-main-button" onClick={handleSwap} disabled={loading}>
+          {loading ? 'Swapping...' : 'Swap'}
+        </button>
+      </div>
+    </div>
   );
 }
 

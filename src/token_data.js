@@ -1,11 +1,11 @@
 export const TOKEN_DATA = {
     MOR: {
-      address: '0x092bAaDB7DEf4C3981454dD9c0A0D7FF07bCFc86',
+      address: '0x092bAaDB7DEf4C3981454dD9c0A0D7FF07bCFc86', 
       symbol: 'MOR',
       decimals: 18,
     },
     WETH: {
-      address: '0x82af49447d8a07e3bd95bd0d56f35241523fbab1',
+      address: '0x82aF49447D8a07e3bd95BD0d56f35241523fBab1', 
       symbol: 'WETH',
       decimals: 18,
     },
@@ -19,5 +19,15 @@ export const TOKEN_DATA = {
       symbol: 'LDO',
       decimals: 18,
     },
-    // Add more tokens here
+    //mockWETH: {
+    //  address: '0xc67dF7d26C40d897D02d91F26aF6114Fe406E796', //testnet WETH address
+    //  symbol: 'WETH',
+     // decimals: 18,
+   // },
+    //saMOR: {
+    //  address: '0xc1664f994Fd3991f98aE944bC16B9aED673eF5fD', //testnet MOR address
+    //  symbol: 'MOR',
+    //  decimals: 18,
+    //},
+   // Add more tokens here
   };
