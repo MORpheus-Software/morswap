@@ -6,7 +6,7 @@ import { computePoolAddress } from '@uniswap/v3-sdk';
 import IUniswapV3PoolABI from '@uniswap/v3-core/artifacts/contracts/interfaces/IUniswapV3Pool.sol/IUniswapV3Pool.json';
 import Quoter from '@uniswap/v3-periphery/artifacts/contracts/lens/Quoter.sol/Quoter.json';
 import './App.css';
-import { performSwap } from './swapService';
+import { performSwap } from './SwapService';
 import { useAddRecentTransaction } from '@rainbow-me/rainbowkit';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 
@@ -173,8 +173,13 @@ function App() {
 
     try {
       setLoading(true);
-      const amountIn = ethers.utils.parseUnits(sellAmount, selectedSellToken.decimals);
-      const receipt = await performSwap(walletClient, amountIn);
+      console.log(`Swapping ${sellAmount} ${selectedSellToken.symbol} for ${selectedBuyToken.symbol}`);
+      const receipt = await performSwap(
+        walletClient, 
+        sellAmount, // Make sure this is a string representing the exact amount
+        selectedSellToken.address, 
+        selectedBuyToken.address
+      );
 
       addRecentTransaction({
         hash: receipt.transactionHash,
@@ -183,9 +188,11 @@ function App() {
       });
 
       alert('Swap successful!');
+      // Refresh balances and prices here
+      fetchPrices(activeInput);
     } catch (error) {
       console.error('Swap failed:', error);
-      alert('Swap failed. See console for details.');
+      alert(`Swap failed: ${error.message}`);
     } finally {
       setLoading(false);
     }

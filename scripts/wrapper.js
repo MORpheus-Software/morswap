@@ -3,7 +3,7 @@ async function main() {
   
     console.log("Wrapping 0.01 ETH into WETH...");
   
-    const wethMockAddress = "0xb6c322FA3D8e0A60AfEB17512905eb2229CE7dA5"; // WETHMock contract address
+    const wethMockAddress = "0x9F220B916edDcD745F9547f2D5cd5D06F40d1B6E"; // WETHMock contract address
     const wethMock = await ethers.getContractAt("WETHMock", wethMockAddress);
   
     // Wrap 0.01 ETH into WETH

@@ -1,7 +1,7 @@
 const { ethers } = require("hardhat");
 
 async function main() {
-  const poolAddress = "0x9Afc054C5B54a01879eAe99A21cd133772C38422";
+  const poolAddress = "0x4701D0A787dcE3b9A63e4a9AA00d94AFEA2d7ec5";
   const poolAbi = [
     "function slot0() external view returns (uint160 sqrtPriceX96, int24 tick, uint16 observationIndex, uint16 observationCardinality, uint16 observationCardinalityNext, uint8 feeProtocol, bool unlocked)",
     "function liquidity() external view returns (uint128)",

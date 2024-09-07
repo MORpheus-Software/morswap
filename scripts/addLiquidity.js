@@ -2,95 +2,116 @@ const { ethers } = require("hardhat");
 
 async function main() {
   const [signer] = await ethers.getSigners();
-  console.log("Adding liquidity with account:", signer.address);
 
-  const nonfungiblePositionManagerAddress = "0x6b2937Bde17889EDCf8fbD8dE31C3C2a70Bc4d65";
-  const wethAddress = "0xb6c322FA3D8e0A60AfEB17512905eb2229CE7dA5";
+  // Contract addresses
   const morAddress = "0xc1664f994Fd3991f98aE944bC16B9aED673eF5fD";
-  const poolAddress = "0x9Afc054C5B54a01879eAe99A21cd133772C38422";
-  const poolFee = 10000; // 1%
+  const wethAddress = "0x9F220B916edDcD745F9547f2D5cd5D06F40d1B6E";
+  const poolAddress = "0x4701D0A787dcE3b9A63e4a9AA00d94AFEA2d7ec5";
+  const nonfungiblePositionManagerAddress = "0x6b2937Bde17889EDCf8fbD8dE31C3C2a70Bc4d65";
 
-  const positionManager = await ethers.getContractAt("INonfungiblePositionManager", nonfungiblePositionManagerAddress);
-  const weth = await ethers.getContractAt("IERC20", wethAddress);
+  console.log("MOR address:", morAddress);
+  console.log("WETH address:", wethAddress);
+  console.log("Pool address:", poolAddress);
+  console.log("NonfungiblePositionManager address:", nonfungiblePositionManagerAddress);
+
+  // Connect to contracts
   const mor = await ethers.getContractAt("IERC20", morAddress);
+  const weth = await ethers.getContractAt("IERC20", wethAddress);
+  const pool = await ethers.getContractAt("IUniswapV3Pool", poolAddress);
+  const nonfungiblePositionManager = await ethers.getContractAt("INonfungiblePositionManager", nonfungiblePositionManagerAddress);
+
+  // Check if pool is initialized
+  const slot0 = await pool.slot0();
+  if (slot0.sqrtPriceX96.eq(0)) {
+    console.log("Pool not initialized. Initializing...");
+    const price = 1000; // 1 WETH = 1000 MOR
+    const sqrtPriceX96 = ethers.BigNumber.from(2).pow(96).mul(Math.floor(Math.sqrt(price) * 2**32)).div(2**32);
+    console.log("Initializing with sqrtPriceX96:", sqrtPriceX96.toString());
+    const initializeTx = await pool.initialize(sqrtPriceX96);
+    await initializeTx.wait();
+    console.log("Pool initialized. Transaction hash:", initializeTx.hash);
+  } else {
+    console.log("Pool already initialized");
+  }
+
+  // Specify amounts to add as liquidity
+  const wethAmount = ethers.utils.parseEther("0.01");  // 0.01 WETH
+  const morAmount = ethers.utils.parseEther("1");  // 1 MOR
+
+  console.log("Adding liquidity:");
+  console.log("WETH amount:", ethers.utils.formatEther(wethAmount), "WETH");
+  console.log("MOR amount:", ethers.utils.formatEther(morAmount), "MOR");
 
   // Check balances
   const wethBalance = await weth.balanceOf(signer.address);
   const morBalance = await mor.balanceOf(signer.address);
-  console.log("WETH balance:", ethers.utils.formatEther(wethBalance));
-  console.log("MOR balance:", ethers.utils.formatEther(morBalance));
+  console.log("WETH balance:", ethers.utils.formatEther(wethBalance), "WETH");
+  console.log("MOR balance:", ethers.utils.formatEther(morBalance), "MOR");
 
-  // Get current tick
-  const poolAbi = ["function slot0() external view returns (uint160 sqrtPriceX96, int24 tick, uint16 observationIndex, uint16 observationCardinality, uint16 observationCardinalityNext, uint8 feeProtocol, bool unlocked)"];
-  const pool = new ethers.Contract(poolAddress, poolAbi, ethers.provider);
-  const { tick } = await pool.slot0();
-  console.log("Current tick:", tick);
-
-  // Calculate tick range
-  const currentTick = -69082; // Use the current tick we observed
-  const tickSpacing = 200;
-  const tickLower = Math.floor(currentTick / tickSpacing) * tickSpacing - tickSpacing * 50; // Wider range
-  const tickUpper = Math.ceil(currentTick / tickSpacing) * tickSpacing + tickSpacing * 50; // Wider range
-  console.log("Tick range:", tickLower, "-", tickUpper);
+  if (wethBalance.lt(wethAmount) || morBalance.lt(morAmount)) {
+    throw new Error("Insufficient balance for one or both tokens");
+  }
 
   // Approve tokens
-  const wethAmount = ethers.utils.parseEther("0.0001"); // Smaller amount
-  const morAmount = ethers.utils.parseEther("100"); // Smaller amount
-  await weth.approve(nonfungiblePositionManagerAddress, wethAmount);
-  await mor.approve(nonfungiblePositionManagerAddress, morAmount);
+  console.log("Approving tokens...");
+  await weth.approve(nonfungiblePositionManager.address, wethAmount);
+  await mor.approve(nonfungiblePositionManager.address, morAmount);
 
   // Prepare mint parameters
   const mintParams = {
     token0: wethAddress,
     token1: morAddress,
-    fee: poolFee,
-    tickLower,
-    tickUpper,
+    fee: 3000, // 0.3%
+    tickLower: -887220,  // Represents a price range of about -90% from the current price
+    tickUpper: 887220,   // Represents a price range of about +900% from the current price
     amount0Desired: wethAmount,
     amount1Desired: morAmount,
     amount0Min: 0,
     amount1Min: 0,
     recipient: signer.address,
-    deadline: Math.floor(Date.now() / 1000) + 60 * 20
+    deadline: Math.floor(Date.now() / 1000) + 60 * 10 // 10 minutes from now
   };
 
-  console.log("Adding liquidity...");
-  console.log("Mint params:", mintParams);
+  console.log("Adding liquidity with parameters:", mintParams);
 
   try {
-    const tx = await positionManager.mint(mintParams, { gasLimit: 500000 });
+    // Mint new position
+    const mintTx = await nonfungiblePositionManager.mint(mintParams);
     console.log("Transaction sent. Waiting for confirmation...");
-    const receipt = await tx.wait();
+    const receipt = await mintTx.wait();
     console.log("Liquidity added. Transaction hash:", receipt.transactionHash);
 
-    // Log events
-    for (const event of receipt.events) {
-      if (event.event === "IncreaseLiquidity") {
-        console.log("Liquidity added:", event.args.liquidity.toString());
-      }
-      if (event.event === "Transfer") {
-        console.log("NFT Token ID:", event.args.tokenId.toString());
-      }
-    }
+    // Find the Transfer event in the receipt to get the tokenId
+    const transferEvent = receipt.events.find(event => event.event === 'Transfer');
+    const tokenId = transferEvent.args.tokenId;
+    console.log("Minted NFT token ID:", tokenId.toString());
 
-    // Retrieve position details using the correct token ID
-    const tokenId = receipt.events.find(e => e.event === "Transfer").args.tokenId;
-    const position = await positionManager.positions(tokenId);
-    console.log("Position details:");
-    console.log("Token ID:", tokenId.toString());
-    console.log("Liquidity:", position.liquidity.toString());
-    console.log("Lower Tick:", position.tickLower.toString());
-    console.log("Upper Tick:", position.tickUpper.toString());
-    console.log("FeeGrowthInside0LastX128:", position.feeGrowthInside0LastX128.toString());
-    console.log("FeeGrowthInside1LastX128:", position.feeGrowthInside1LastX128.toString());
-    console.log("TokensOwed0:", position.tokensOwed0.toString());
-    console.log("TokensOwed1:", position.tokensOwed1.toString());
+    // Get position information
+    const position = await nonfungiblePositionManager.positions(tokenId);
+    console.log("Position liquidity:", position.liquidity.toString());
   } catch (error) {
     console.error("Error adding liquidity:", error);
-    if (error.transaction) {
-      console.error("Failed transaction:", error.transaction);
+    if (error.error && error.error.message) {
+      console.error("Detailed error:", error.error.message);
     }
   }
+
+  // Check new pool state
+  const liquidity = await pool.liquidity();
+  const updatedSlot0 = await pool.slot0();
+  console.log("Pool liquidity:", liquidity.toString());
+  console.log("Pool current tick:", updatedSlot0.tick);
+  console.log("Pool sqrt price X96:", updatedSlot0.sqrtPriceX96.toString());
+
+  // Calculate and log the actual price
+  const price = (updatedSlot0.sqrtPriceX96.pow(2).mul(ethers.BigNumber.from(10).pow(18)).div(ethers.BigNumber.from(2).pow(192))).toString() / 1e18;
+  console.log("Current price:", price, "MOR per WETH");
+
+  // Check final balances
+  const finalWethBalance = await weth.balanceOf(signer.address);
+  const finalMorBalance = await mor.balanceOf(signer.address);
+  console.log("Final WETH balance:", ethers.utils.formatEther(finalWethBalance), "WETH");
+  console.log("Final MOR balance:", ethers.utils.formatEther(finalMorBalance), "MOR");
 }
 
 main()

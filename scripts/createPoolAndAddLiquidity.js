@@ -4,7 +4,7 @@ async function main() {
   const [deployer] = await ethers.getSigners();
   console.log("Using account:", deployer.address);
 
-  const factoryAddress = "0x248AB79Bbb9bC29bB72f7Cd42F17e054Fc40188e"; // Official Uniswap V3 factory on Arbitrum Sepolia
+  const factoryAddress = "0x248AB79Bbb9bC29bB72f7Cd42F17e054Fc40188e";
   const nonfungiblePositionManagerAddress = "0x6b2937Bde17889EDCf8fbD8dE31C3C2a70Bc4d65";
 
   const factory = await ethers.getContractAt("IUniswapV3Factory", factoryAddress);
@@ -14,7 +14,6 @@ async function main() {
   const morAddress = "0xc1664f994Fd3991f98aE944bC16B9aED673eF5fD";
   const poolFee = 10000; // 1%
 
-  // Check if the pool exists
   let poolAddress = await factory.getPool(wethAddress, morAddress, poolFee);
   console.log("Existing pool address:", poolAddress);
 
@@ -28,7 +27,6 @@ async function main() {
 
   const pool = await ethers.getContractAt("IUniswapV3Pool", poolAddress);
 
-  // Initialize the pool
   console.log("Initializing pool...");
   const initialPrice = ethers.utils.parseUnits("0.001", 18); // 1 WETH = 1000 MOR
   const sqrtPriceX96 = ethers.BigNumber.from(
@@ -50,14 +48,13 @@ async function main() {
 
   console.log("Current tick:", (await pool.slot0()).tick.toString());
 
-  // Add liquidity
   const currentTick = (await pool.slot0()).tick;
   const tickSpacing = await pool.tickSpacing();
-  const tickLower = Math.floor(currentTick / tickSpacing) * tickSpacing - tickSpacing * 20;
-  const tickUpper = Math.ceil(currentTick / tickSpacing) * tickSpacing + tickSpacing * 20;
+  const tickLower = Math.floor(currentTick / tickSpacing) * tickSpacing - tickSpacing * 10;
+  const tickUpper = Math.ceil(currentTick / tickSpacing) * tickSpacing + tickSpacing * 10;
 
   const amount0ToAdd = ethers.utils.parseUnits("0.01", 18); // 0.01 WETH
-  const amount1ToAdd = ethers.utils.parseUnits("10", 18); // 10 MOR
+  const amount1ToAdd = ethers.utils.parseUnits("10", 18); // 10 MOR (1:1000 ratio)
 
   console.log("Approving tokens for transfer...");
   const weth = await ethers.getContractAt("IERC20", wethAddress);
@@ -88,6 +85,8 @@ async function main() {
     for (const event of receipt.events) {
       if (event.event === "IncreaseLiquidity") {
         console.log("Liquidity added:", event.args.liquidity.toString());
+        console.log("Amount of WETH added:", ethers.utils.formatUnits(event.args.amount0, 18));
+        console.log("Amount of MOR added:", ethers.utils.formatUnits(event.args.amount1, 18));
         break;
       }
     }
@@ -95,9 +94,13 @@ async function main() {
     console.error("Failed to add liquidity:", error.message);
   }
 
-  // Check final pool state
   const finalLiquidity = await pool.liquidity();
   console.log("Final pool liquidity:", finalLiquidity.toString());
+
+  const { sqrtPriceX96: finalSqrtPriceX96 } = await pool.slot0();
+  const finalPrice = (finalSqrtPriceX96 * finalSqrtPriceX96 * (10**18) / (2**192)) / (10**18);
+  console.log("Final pool price (MOR per WETH):", finalPrice);
+  console.log("Final pool price (WETH per MOR):", 1 / finalPrice);
 }
 
 main()
