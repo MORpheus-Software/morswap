@@ -35,8 +35,15 @@ export async function performSwap(walletClient, amountInString, tokenIn, tokenOu
 
   const amountIn = ethers.utils.parseUnits(amountInString, 18);
 
-  // Approve the router to spend tokens
+  // Check token balance
   const tokenToApprove = tokenIn === morAddress ? mor : weth;
+  const balance = await tokenToApprove.balanceOf(address);
+  console.log(`Token balance: ${ethers.utils.formatEther(balance)} ${tokenIn === morAddress ? 'MOR' : 'WETH'}`);
+  if (balance.lt(amountIn)) {
+    throw new Error("Insufficient token balance");
+  }
+
+  // Approve the router to spend tokens
   console.log(`Approving SwapRouter02 to spend ${ethers.utils.formatEther(amountIn)} of token ${tokenIn}`);
   const approveTx = await tokenToApprove.approve(swapRouter02Address, amountIn);
   await approveTx.wait();
@@ -58,7 +65,7 @@ export async function performSwap(walletClient, amountInString, tokenIn, tokenOu
   console.log("Pool liquidity:", ethers.utils.formatEther(liquidity));
 
   // Prepare swap parameters
-  const slippageTolerance = 50; // 0.5%
+  const slippageTolerance = 100; // 1%
   const minOut = amountIn.mul(10000 - slippageTolerance).div(10000);
 
   const params = {
@@ -69,7 +76,7 @@ export async function performSwap(walletClient, amountInString, tokenIn, tokenOu
     deadline: Math.floor(Date.now() / 1000) + 60 * 20,
     amountIn: amountIn,
     amountOutMinimum: minOut,
-    sqrtPriceLimitX96: 0 // We don't want to set a price limit
+    sqrtPriceLimitX96: 0 // No price limit set
   };
 
   // Get latest gas prices
@@ -88,7 +95,7 @@ export async function performSwap(walletClient, amountInString, tokenIn, tokenOu
     console.log("Estimated gas limit:", estimatedGasLimit.toString());
   } catch (error) {
     console.error("Failed to estimate gas. Using default value.");
-    estimatedGasLimit = ethers.BigNumber.from(300000); // Use a reasonable default value
+    estimatedGasLimit = ethers.BigNumber.from(500000); // increased default value
   }
 
   // Execute the swap

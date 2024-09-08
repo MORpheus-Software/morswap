@@ -270,3 +270,41 @@ body {
   color: #387a3a;
   font-weight: bold;
 }
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.button-container button {
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+.button-container button:first-child {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.button-container button:first-child:hover {
+  background-color: #45a049;
+}
+
+.testing-button {
+  background-color: #008CBA;
+  color: white;
+}
+
+.testing-button:hover {
+  background-color: #007B9E;
+}
+
+.testing-link {
+  text-decoration: none;
+}

@@ -9,7 +9,8 @@ import './App.css';
 import { performSwap } from './SwapService';
 import { useAddRecentTransaction } from '@rainbow-me/rainbowkit';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
-
+import { Link, Routes, Route, useLocation } from 'react-router-dom';
+import TestingInstructions from './testinginstructions'; 
 
 import { TOKEN_DATA } from './token_data';
 
@@ -198,11 +199,103 @@ function App() {
     }
   };
 
+  const location = useLocation();
+
+  const renderSwapInterface = () => (
+    <div className="swap-container">
+      <h1>MorSwap.org</h1>
+      <div className="swap-section">
+        <div className="input-label">Sell</div>
+        <div className="swap-box">
+          <div className="token-selector">
+            <select 
+              id="sellToken" 
+              value={selectedSellToken.symbol}
+              onChange={(e) => handleTokenChange(e, 'sell')}
+            >
+              {Object.keys(TOKEN_DATA).map((tokenSymbol) => (
+                <option key={tokenSymbol} value={tokenSymbol}>
+                  {TOKEN_DATA[tokenSymbol].symbol}
+                </option>
+              ))}
+            </select>
+            <span>Balance: 0.00</span>
+          </div>
+          <div className="input-container">
+            <input
+              type="number"
+              id="sellAmount"
+              placeholder="0"
+              value={sellAmount}
+              onChange={handleSellInputChange}
+            />
+            <div className={`usd-value ${loading ? 'blur-text' : ''}`}>
+              {loading ? '' : `$${calculateUsdValue(sellAmount, selectedSellToken)}`}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <button className="swap-tokens-button" onClick={handleSwapTokens}>
+        &#8645;
+      </button>
+
+      <div className="swap-section">
+        <div className="input-label">Buy</div>
+        <div className="swap-box">
+          <div className="token-selector">
+            <select 
+              id="buyToken" 
+              value={selectedBuyToken.symbol}
+              onChange={(e) => handleTokenChange(e, 'buy')}
+            >
+              {Object.keys(TOKEN_DATA).map((tokenSymbol) => (
+                <option key={tokenSymbol} value={tokenSymbol}>
+                  {TOKEN_DATA[tokenSymbol].symbol}
+                </option>
+              ))}
+            </select>
+            <span>Balance: 0.00</span>
+          </div>
+          <div className="input-container">
+            <input
+              type="number"
+              id="buyAmount"
+              placeholder="0"
+              value={buyAmount}
+              onChange={handleBuyInputChange}
+            />
+            <div className={`usd-value ${loading ? 'blur-text' : ''}`}>
+              {loading ? '' : `$${calculateUsdValue(buyAmount, selectedBuyToken)}`}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="price-display">
+        {loading
+          ? 'Loading price...'
+          : `1 ${selectedSellToken.symbol} = ${priceInEth ? parseFloat(priceInEth).toFixed(6) : 'N/A'} ${selectedBuyToken.symbol}`}
+      </div>
+
+      <div className="button-container">
+        <button onClick={handleSwap} disabled={!address || loading}>
+          {loading ? 'Swapping...' : 'Swap'}
+        </button>
+        <Link to="/testing-instructions" className="testing-link">
+          <button className="testing-button">Testing Instructions</button>
+        </Link>
+      </div>
+    </div>
+  );
+
   return (
     <div className="container">
       <div className="header">
         <div className="logo">
-          <button className="swap-btn">Swap</button>
+          <Link to="/">
+            <button className="swap-btn">Swap</button>
+          </Link>
           <button className="Projects">Projects: Coming Soon</button>
         </div>
         <div className="wallet-button">
@@ -210,87 +303,10 @@ function App() {
         </div>
       </div>
 
-      <div className="swap-container">
-        <h1>MorSwap.org</h1>
-
-        <div className="swap-section">
-          <div className="input-label">Sell</div>
-          <div className="swap-box">
-            <div className="token-selector">
-              <select 
-                id="sellToken" 
-                value={selectedSellToken.symbol}
-                onChange={(e) => handleTokenChange(e, 'sell')}
-              >
-                {Object.keys(TOKEN_DATA).map((tokenSymbol) => (
-                  <option key={tokenSymbol} value={tokenSymbol}>
-                    {TOKEN_DATA[tokenSymbol].symbol}
-                  </option>
-                ))}
-              </select>
-              <span>Balance: 0.00</span>
-            </div>
-            <div className="input-container">
-              <input
-                type="number"
-                id="sellAmount"
-                placeholder="0"
-                value={sellAmount}
-                onChange={handleSellInputChange}
-              />
-              <div className={`usd-value ${loading ? 'blur-text' : ''}`}>
-                {loading ? '' : `$${calculateUsdValue(sellAmount, selectedSellToken)}`}
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <button className="swap-tokens-button" onClick={handleSwapTokens}>
-          &#8645;
-        </button>
-
-        <div className="swap-section">
-          <div className="input-label">Buy</div>
-          <div className="swap-box">
-            <div className="token-selector">
-              <select 
-                id="buyToken" 
-                value={selectedBuyToken.symbol}
-                onChange={(e) => handleTokenChange(e, 'buy')}
-              >
-                {Object.keys(TOKEN_DATA).map((tokenSymbol) => (
-                  <option key={tokenSymbol} value={tokenSymbol}>
-                    {TOKEN_DATA[tokenSymbol].symbol}
-                  </option>
-                ))}
-              </select>
-              <span>Balance: 0.00</span>
-            </div>
-            <div className="input-container">
-              <input
-                type="number"
-                id="buyAmount"
-                placeholder="0"
-                value={buyAmount}
-                onChange={handleBuyInputChange}
-              />
-              <div className={`usd-value ${loading ? 'blur-text' : ''}`}>
-                {loading ? '' : `$${calculateUsdValue(buyAmount, selectedBuyToken)}`}
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="price-display">
-          {loading
-            ? 'Loading price...'
-            : `1 ${selectedSellToken.symbol} = ${priceInEth ? parseFloat(priceInEth).toFixed(6) : 'N/A'} ${selectedBuyToken.symbol}`}
-        </div>
-
-        <button className="swap-main-button" onClick={handleSwap} disabled={loading}>
-          {loading ? 'Swapping...' : 'Swap'}
-        </button>
-      </div>
+      <Routes>
+        <Route path="/" element={renderSwapInterface()} />
+        <Route path="/testing-instructions" element={<TestingInstructions />} />
+      </Routes>
     </div>
   );
 }
