@@ -1,70 +1,34 @@
-# Getting Started with Create React App
+Testing Instructions
+Welcome to the MorSwap testing page. Follow these instructions to test the swap functionality:
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Thank you so much for testing. Please note that although this is testing site, and I have done everything I can 
+to make sure you are unable to connect to any Main networks. 
+Please take a moment to ensure you are using the Arbitrum Sepolia network. 
+You can check this by clicking the network name at the top of the page. 
+And while this is a testing site, please be aware that there are still risks involved with
+ loss of testnet funds. *Please double check every transaction through metamask and the browser console*.
 
-## Available Scripts
+Connect your wallet using the "Connect Wallet" button on the top right corner.
+Ensure you have some testnet (MOR, ETH) in your wallet. if you don't saMOR can be found at MorFaucet.xyz  
+And saETH can be found at faucets.chain.link/sepolia  This is my favorite faucet.
 
-In the project directory, you can run:
+Before you Swap, For right now, you must first wrap your ETH into the mockWETH that I created. 
+You can do this with the buttons Wrap and Unwrap on the Morswap Testing instructions page. 
+This will Wrap/Unwrap any desired amount of ETH/WETH at a time, Uniswap does take care of this though Multi-Hop Swaps which I plan to incorporate very soon. 
 
-### `npm start`
+The address for my mockWETH is 0x9F220B916edDcD745F9547f2D5cd5D06F40d1B6E Please add this token to your wallet
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Please be aware due to a lack of funds the pool has very low liquidity, so please try and swap small 
+amounts such as 0.0001 MOR and 0.000001 WETH. 
+Alternitively if you would like to donate some funds to the pool After wrapping some ETH on the testing page, you can do so by clicking add Liqudity. This will add a fixed 1000 MOR to 1 WETH ratio to the pool
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Enter the amount you want to swap Within the Top input field.
 
-### `npm test`
+Click the "Swap" button to execute the swap.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Review the transaction and Sign.
 
-### `npm run build`
+Confirm the transaction in your wallet.
+Wait for the transaction to be processed and check your wallet for the swapped tokens.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+If you encounter any issues or have questions, please enter issues in the Github
