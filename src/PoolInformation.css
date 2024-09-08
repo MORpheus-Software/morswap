@@ -1,0 +1,50 @@
+.pool-information {
+    margin-top: 20px;
+}
+  
+.pool-information button {
+    border: 3px solid #4CAF50;
+    color: rgb(31, 36, 32);
+    padding: 7.5px 16px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: border-color 0.3s;
+    transform: translate(0%, 0%);
+}
+  
+.pool-information button:hover {
+    border-color: #2ac7db;  /* Darker shade of green */
+}
+  
+.dropdown-content {
+    background-color: #f9f9f9;
+    padding: 10px;
+    border: 1px solid #22c4cf;
+    border-radius: 4px;
+    margin-top: 10px;
+    color: #333; /* Dark gray text color */
+    max-height: 500px;
+    overflow-y: auto;
+}
+
+.dropdown-content h3, .dropdown-content h4 {
+    color: #2ac7db; 
+    margin-top: 15px;
+    margin-bottom: 10px;
+}
+
+.dropdown-content p {
+    margin: 5px 0;
+    font-size: 14px;
+}
+
+.dropdown-content span.value {
+    font-weight: bold;
+    color: #4CAF50; 
+    word-break: break-all;
+}
+  
+.error {
+    color: red;
+}

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { ethers } from 'ethers';
+import NonfungiblePositionManagerABI from '@uniswap/v3-periphery/artifacts/contracts/NonfungiblePositionManager.sol/NonfungiblePositionManager.json';
 
 const MOR_ADDRESS = "0xc1664f994Fd3991f98aE944bC16B9aED673eF5fD";
 const WETH_ADDRESS = "0x9F220B916edDcD745F9547f2D5cd5D06F40d1B6E";
@@ -7,8 +8,6 @@ const POOL_ADDRESS = "0x4701D0A787dcE3b9A63e4a9AA00d94AFEA2d7ec5";
 const NONFUNGIBLE_POSITION_MANAGER_ADDRESS = "0x6b2937Bde17889EDCf8fbD8dE31C3C2a70Bc4d65";
 
 const ERC20_ABI = ["function approve(address spender, uint256 amount) public returns (bool)", "function balanceOf(address account) public view returns (uint256)"];
-const POOL_ABI = ["function slot0() external view returns (uint160 sqrtPriceX96, int24 tick, uint16 observationIndex, uint16 observationCardinality, uint16 observationCardinalityNext, uint8 feeProtocol, bool unlocked)"];
-const NONFUNGIBLE_POSITION_MANAGER_ABI = ["function mint((address,address,uint24,int24,int24,uint256,uint256,uint256,uint256,address,uint256)) external payable returns (uint256 tokenId, uint128 liquidity, uint256 amount0, uint256 amount1)"];
 
 function AddLiquidity() {
   const [wethAmount, setWethAmount] = useState('');
@@ -28,21 +27,15 @@ function AddLiquidity() {
       const provider = new ethers.providers.Web3Provider(window.ethereum);
       const signer = provider.getSigner();
 
+      console.log("Connected to network:", (await provider.getNetwork()).name);
+      console.log("Signer address:", await signer.getAddress());
+
       const weth = new ethers.Contract(WETH_ADDRESS, ERC20_ABI, signer);
       const mor = new ethers.Contract(MOR_ADDRESS, ERC20_ABI, signer);
-      const pool = new ethers.Contract(POOL_ADDRESS, POOL_ABI, signer);
-      const nonfungiblePositionManager = new ethers.Contract(NONFUNGIBLE_POSITION_MANAGER_ADDRESS, NONFUNGIBLE_POSITION_MANAGER_ABI, signer);
+      const nonfungiblePositionManager = new ethers.Contract(NONFUNGIBLE_POSITION_MANAGER_ADDRESS, NonfungiblePositionManagerABI.abi, signer);
 
       const wethAmountWei = ethers.utils.parseEther(wethAmount);
       const morAmountWei = wethAmountWei.mul(1000);
-
-      // Check balances
-      const wethBalance = await weth.balanceOf(await signer.getAddress());
-      const morBalance = await mor.balanceOf(await signer.getAddress());
-
-      if (wethBalance.lt(wethAmountWei) || morBalance.lt(morAmountWei)) {
-        throw new Error("Insufficient balance for one or both tokens");
-      }
 
       // Approve tokens
       await weth.approve(NONFUNGIBLE_POSITION_MANAGER_ADDRESS, wethAmountWei);
@@ -52,7 +45,7 @@ function AddLiquidity() {
       const mintParams = {
         token0: WETH_ADDRESS,
         token1: MOR_ADDRESS,
-        fee: 3000, // 0.3%
+        fee: 3000,
         tickLower: -887220,
         tickUpper: 887220,
         amount0Desired: wethAmountWei,
@@ -63,12 +56,21 @@ function AddLiquidity() {
         deadline: Math.floor(Date.now() / 1000) + 60 * 10 // 10 minutes from now
       };
 
+      console.log("Mint params:", mintParams);
+
       // Mint new position
-      const mintTx = await nonfungiblePositionManager.mint(mintParams);
+      console.log("Minting new position...");
+      const mintTx = await nonfungiblePositionManager.mint(mintParams, {
+        gasLimit: ethers.utils.hexlify(1000000) // Explicitly set gas limit
+      });
+
+      console.log("Mint transaction sent:", mintTx.hash);
       const receipt = await mintTx.wait();
+      console.log("Mint transaction confirmed");
 
       setSuccess(`Liquidity added successfully. Transaction hash: ${receipt.transactionHash}`);
     } catch (err) {
+      console.error("Error adding liquidity:", err);
       setError(err.message);
     } finally {
       setLoading(false);

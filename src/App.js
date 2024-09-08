@@ -29,7 +29,7 @@ function App() {
   const addRecentTransaction = useAddRecentTransaction();
 
   const provider = new ethers.providers.JsonRpcProvider('https://arb1.arbitrum.io/rpc');
-  const QUOTE_CONTRACT_ADDRESS = '0xb27308f9F90D607463bb33eA1BeBb41C27CE5AB6';
+  const QUOTE_CONTRACT_ADDRESS = '0x2779a0CC1c3e0E44D2542EC3e79e3864Ae93Ef0B';
 
   useEffect(() => {
     fetchEthPriceInUSD();
@@ -49,7 +49,7 @@ function App() {
       const ethToken = new Token(42161, selectedBuyToken.address, selectedBuyToken.decimals, selectedBuyToken.symbol, 'Wrapped Ether');
 
       const poolAddress = computePoolAddress({
-        factoryAddress: '0x1F98431c8aD98523631AE4a59f267346ea31F984',
+        factoryAddress: '0x248AB79Bbb9bC29bB72f7Cd42F17e054Fc40188e',
         tokenA: usdcToken,
         tokenB: ethToken,
         fee: 3000,
