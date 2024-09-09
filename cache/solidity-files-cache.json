@@ -1,0 +1,2212 @@
+{
+  "_format": "hh-sol-cache-2",
+  "files": {
+    "C:\\Users\\toddz\\OneDrive\\Documents\\VSCODE\\morswap\\contracts\\base\\PeripheryImmutableState.sol": {
+      "lastModificationDate": 1725472550418,
+      "contentHash": "42131c8b1da63c6e1f55cf29f922e0d8",
+      "sourceName": "contracts/base/PeripheryImmutableState.sol",
+      "solcConfig": {
+        "version": "0.7.6",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "@uniswap/v3-periphery/contracts/interfaces/IPeripheryImmutableState.sol"
+      ],
+      "versionPragmas": [
+        "=0.7.6"
+      ],
+      "artifacts": [
+        "PeripheryImmutableState"
+      ]
+    },
+    "C:\\Users\\toddz\\OneDrive\\Documents\\VSCODE\\morswap\\node_modules\\@uniswap\\v3-periphery\\contracts\\interfaces\\IPeripheryImmutableState.sol": {
+      "lastModificationDate": 1725555672364,
+      "contentHash": "e68917661480772223d87a606afb29cd",
+      "sourceName": "@uniswap/v3-periphery/contracts/interfaces/IPeripheryImmutableState.sol",
+      "solcConfig": {
+        "version": "0.7.6",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        ">=0.5.0"
+      ],
+      "artifacts": [
+        "IPeripheryImmutableState"
+      ]
+    },
+    "C:\\Users\\toddz\\OneDrive\\Documents\\VSCODE\\morswap\\node_modules\\@uniswap\\v3-periphery\\contracts\\interfaces\\INonfungiblePositionManager.sol": {
+      "lastModificationDate": 1725555672364,
+      "contentHash": "2153274e36e94cc4e2c987f098cf5420",
+      "sourceName": "@uniswap/v3-periphery/contracts/interfaces/INonfungiblePositionManager.sol",
+      "solcConfig": {
+        "version": "0.7.6",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "@openzeppelin/contracts/token/ERC721/IERC721Metadata.sol",
+        "@openzeppelin/contracts/token/ERC721/IERC721Enumerable.sol",
+        "./IPoolInitializer.sol",
+        "./IERC721Permit.sol",
+        "./IPeripheryPayments.sol",
+        "./IPeripheryImmutableState.sol",
+        "../libraries/PoolAddress.sol"
+      ],
+      "versionPragmas": [
+        ">=0.7.5"
+      ],
+      "artifacts": [
+        "INonfungiblePositionManager"
+      ]
+    },
+    "C:\\Users\\toddz\\OneDrive\\Documents\\VSCODE\\morswap\\node_modules\\@uniswap\\v3-periphery\\contracts\\libraries\\PoolAddress.sol": {
+      "lastModificationDate": 1725555672401,
+      "contentHash": "6cec4f6b237de21ad97bf32c19a2e0d8",
+      "sourceName": "@uniswap/v3-periphery/contracts/libraries/PoolAddress.sol",
+      "solcConfig": {
+        "version": "0.7.6",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        ">=0.5.0"
+      ],
+      "artifacts": [
+        "PoolAddress"
+      ]
+    },
+    "C:\\Users\\toddz\\OneDrive\\Documents\\VSCODE\\morswap\\node_modules\\@openzeppelin\\contracts\\token\\ERC721\\IERC721Enumerable.sol": {
+      "lastModificationDate": 1725662680165,
+      "contentHash": "889ec04fca4214581eef408fff230efa",
+      "sourceName": "@openzeppelin/contracts/token/ERC721/IERC721Enumerable.sol",
+      "solcConfig": {
+        "version": "0.7.6",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "./IERC721.sol"
+      ],
+      "versionPragmas": [
+        "^0.7.0"
+      ],
+      "artifacts": [
+        "IERC721Enumerable"
+      ]
+    },
+    "C:\\Users\\toddz\\OneDrive\\Documents\\VSCODE\\morswap\\node_modules\\@uniswap\\v3-periphery\\contracts\\interfaces\\IPoolInitializer.sol": {
+      "lastModificationDate": 1725555672366,
+      "contentHash": "11600b3ed90d17aa07e53a77430a6d6c",
+      "sourceName": "@uniswap/v3-periphery/contracts/interfaces/IPoolInitializer.sol",
+      "solcConfig": {
+        "version": "0.7.6",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        ">=0.7.5"
+      ],
+      "artifacts": [
+        "IPoolInitializer"
+      ]
+    },
+    "C:\\Users\\toddz\\OneDrive\\Documents\\VSCODE\\morswap\\node_modules\\@openzeppelin\\contracts\\token\\ERC721\\IERC721Metadata.sol": {
+      "lastModificationDate": 1725662680168,
+      "contentHash": "7fe751b35ebe8466b56415cce55a7074",
+      "sourceName": "@openzeppelin/contracts/token/ERC721/IERC721Metadata.sol",
+      "solcConfig": {
+        "version": "0.7.6",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "./IERC721.sol"
+      ],
+      "versionPragmas": [
+        "^0.7.0"
+      ],
+      "artifacts": [
+        "IERC721Metadata"
+      ]
+    },
+    "C:\\Users\\toddz\\OneDrive\\Documents\\VSCODE\\morswap\\node_modules\\@uniswap\\v3-periphery\\contracts\\interfaces\\IERC721Permit.sol": {
+      "lastModificationDate": 1725555672359,
+      "contentHash": "9073d26f60e6253b2dfbc103c78cf70d",
+      "sourceName": "@uniswap/v3-periphery/contracts/interfaces/IERC721Permit.sol",
+      "solcConfig": {
+        "version": "0.7.6",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "@openzeppelin/contracts/token/ERC721/IERC721.sol"
+      ],
+      "versionPragmas": [
+        ">=0.7.5"
+      ],
+      "artifacts": [
+        "IERC721Permit"
+      ]
+    },
+    "C:\\Users\\toddz\\OneDrive\\Documents\\VSCODE\\morswap\\node_modules\\@uniswap\\v3-periphery\\contracts\\interfaces\\IPeripheryPayments.sol": {
+      "lastModificationDate": 1725555672365,
+      "contentHash": "8aa07bcaad7779d2bae8089adef235bf",
+      "sourceName": "@uniswap/v3-periphery/contracts/interfaces/IPeripheryPayments.sol",
+      "solcConfig": {
+        "version": "0.7.6",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        ">=0.7.5"
+      ],
+      "artifacts": [
+        "IPeripheryPayments"
+      ]
+    },
+    "C:\\Users\\toddz\\OneDrive\\Documents\\VSCODE\\morswap\\node_modules\\@openzeppelin\\contracts\\token\\ERC721\\IERC721.sol": {
+      "lastModificationDate": 1725662680163,
+      "contentHash": "1607fe9cc333c6de30f5098d45061a0b",
+      "sourceName": "@openzeppelin/contracts/token/ERC721/IERC721.sol",
+      "solcConfig": {
+        "version": "0.7.6",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "../../introspection/IERC165.sol"
+      ],
+      "versionPragmas": [
+        "^0.7.0"
+      ],
+      "artifacts": [
+        "IERC721"
+      ]
+    },
+    "C:\\Users\\toddz\\OneDrive\\Documents\\VSCODE\\morswap\\node_modules\\@openzeppelin\\contracts\\introspection\\IERC165.sol": {
+      "lastModificationDate": 1725662680133,
+      "contentHash": "253edeb099cfd6a3b0501d2620312e3e",
+      "sourceName": "@openzeppelin/contracts/introspection/IERC165.sol",
+      "solcConfig": {
+        "version": "0.7.6",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.7.0"
+      ],
+      "artifacts": [
+        "IERC165"
+      ]
+    },
+    "C:\\Users\\toddz\\OneDrive\\Documents\\VSCODE\\morswap\\contracts\\NonfungibleTokenPositionDescriptor.sol": {
+      "lastModificationDate": 1725472508227,
+      "contentHash": "d4ee3f47c0ef80acfefd5a1f996a7a7d",
+      "sourceName": "contracts/NonfungibleTokenPositionDescriptor.sol",
+      "solcConfig": {
+        "version": "0.7.6",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "@uniswap/v3-core/contracts/interfaces/IUniswapV3Pool.sol",
+        "@uniswap/lib/contracts/libraries/SafeERC20Namer.sol",
+        "@uniswap/v3-periphery/contracts/libraries/ChainId.sol",
+        "@uniswap/v3-periphery/contracts/interfaces/INonfungibleTokenPositionDescriptor.sol",
+        "@uniswap/v3-periphery/contracts/interfaces/IERC20Metadata.sol",
+        "@uniswap/v3-periphery/contracts/libraries/PoolAddress.sol",
+        "@uniswap/v3-periphery/contracts/libraries/NFTDescriptor.sol",
+        "@uniswap/v3-periphery/contracts/libraries/TokenRatioSortOrder.sol",
+        "@uniswap/v3-periphery/contracts/interfaces/INonfungiblePositionManager.sol"
+      ],
+      "versionPragmas": [
+        "=0.7.6"
+      ],
+      "artifacts": [
+        "NonfungibleTokenPositionDescriptor"
+      ]
+    },
+    "C:\\Users\\toddz\\OneDrive\\Documents\\VSCODE\\morswap\\node_modules\\@uniswap\\lib\\contracts\\libraries\\SafeERC20Namer.sol": {
+      "lastModificationDate": 1725464284703,
+      "contentHash": "8ab2e10564b4edc6113b3a3f4b373ba2",
+      "sourceName": "@uniswap/lib/contracts/libraries/SafeERC20Namer.sol",
+      "solcConfig": {
+        "version": "0.7.6",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "./AddressStringUtil.sol"
+      ],
+      "versionPragmas": [
+        ">=0.5.0"
+      ],
+      "artifacts": [
+        "SafeERC20Namer"
+      ]
+    },
+    "C:\\Users\\toddz\\OneDrive\\Documents\\VSCODE\\morswap\\node_modules\\@uniswap\\v3-periphery\\contracts\\libraries\\ChainId.sol": {
+      "lastModificationDate": 1725555672354,
+      "contentHash": "99798e248a42a68a14fb09975b97b07e",
+      "sourceName": "@uniswap/v3-periphery/contracts/libraries/ChainId.sol",
+      "solcConfig": {
+        "version": "0.7.6",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        ">=0.7.0"
+      ],
+      "artifacts": [
+        "ChainId"
+      ]
+    },
+    "C:\\Users\\toddz\\OneDrive\\Documents\\VSCODE\\morswap\\node_modules\\@uniswap\\v3-periphery\\contracts\\interfaces\\INonfungibleTokenPositionDescriptor.sol": {
+      "lastModificationDate": 1725555672364,
+      "contentHash": "65b2c99d12e9b554a0c402a3880c09e8",
+      "sourceName": "@uniswap/v3-periphery/contracts/interfaces/INonfungibleTokenPositionDescriptor.sol",
+      "solcConfig": {
+        "version": "0.7.6",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "./INonfungiblePositionManager.sol"
+      ],
+      "versionPragmas": [
+        ">=0.5.0"
+      ],
+      "artifacts": [
+        "INonfungibleTokenPositionDescriptor"
+      ]
+    },
+    "C:\\Users\\toddz\\OneDrive\\Documents\\VSCODE\\morswap\\node_modules\\@uniswap\\v3-core\\contracts\\interfaces\\IUniswapV3Pool.sol": {
+      "lastModificationDate": 1725730109429,
+      "contentHash": "e6badd8268772b99e7ca397aff11a965",
+      "sourceName": "@uniswap/v3-core/contracts/interfaces/IUniswapV3Pool.sol",
+      "solcConfig": {
+        "version": "0.7.6",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "./pool/IUniswapV3PoolImmutables.sol",
+        "./pool/IUniswapV3PoolState.sol",
+        "./pool/IUniswapV3PoolDerivedState.sol",
+        "./pool/IUniswapV3PoolActions.sol",
+        "./pool/IUniswapV3PoolOwnerActions.sol",
+        "./pool/IUniswapV3PoolEvents.sol"
+      ],
+      "versionPragmas": [
+        ">=0.5.0"
+      ],
+      "artifacts": [
+        "IUniswapV3Pool"
+      ]
+    },
+    "C:\\Users\\toddz\\OneDrive\\Documents\\VSCODE\\morswap\\node_modules\\@uniswap\\v3-periphery\\contracts\\interfaces\\IERC20Metadata.sol": {
+      "lastModificationDate": 1725555672357,
+      "contentHash": "1c0aac2bcbcf1eee4da3507cde92a115",
+      "sourceName": "@uniswap/v3-periphery/contracts/interfaces/IERC20Metadata.sol",
+      "solcConfig": {
+        "version": "0.7.6",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "@openzeppelin/contracts/token/ERC20/IERC20.sol"
+      ],
+      "versionPragmas": [
+        "^0.7.0"
+      ],
+      "artifacts": [
+        "IERC20Metadata"
+      ]
+    },
+    "C:\\Users\\toddz\\OneDrive\\Documents\\VSCODE\\morswap\\node_modules\\@uniswap\\v3-periphery\\contracts\\libraries\\TokenRatioSortOrder.sol": {
+      "lastModificationDate": 1725555672408,
+      "contentHash": "d7a9468bf522b06f6a793480f501b8d2",
+      "sourceName": "@uniswap/v3-periphery/contracts/libraries/TokenRatioSortOrder.sol",
+      "solcConfig": {
+        "version": "0.7.6",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "=0.7.6"
+      ],
+      "artifacts": [
+        "TokenRatioSortOrder"
+      ]
+    },
+    "C:\\Users\\toddz\\OneDrive\\Documents\\VSCODE\\morswap\\node_modules\\@uniswap\\v3-periphery\\contracts\\libraries\\NFTDescriptor.sol": {
+      "lastModificationDate": 1725555672373,
+      "contentHash": "437d6ca1902f7bd37d731240df64522f",
+      "sourceName": "@uniswap/v3-periphery/contracts/libraries/NFTDescriptor.sol",
+      "solcConfig": {
+        "version": "0.7.6",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "@uniswap/v3-core/contracts/interfaces/IUniswapV3Pool.sol",
+        "@uniswap/v3-core/contracts/libraries/TickMath.sol",
+        "@uniswap/v3-core/contracts/libraries/BitMath.sol",
+        "@uniswap/v3-core/contracts/libraries/FullMath.sol",
+        "@openzeppelin/contracts/utils/Strings.sol",
+        "@openzeppelin/contracts/math/SafeMath.sol",
+        "@openzeppelin/contracts/math/SignedSafeMath.sol",
+        "base64-sol/base64.sol",
+        "./HexStrings.sol",
+        "./NFTSVG.sol"
+      ],
+      "versionPragmas": [
+        ">=0.7.0"
+      ],
+      "artifacts": [
+        "NFTDescriptor"
+      ]
+    },
+    "C:\\Users\\toddz\\OneDrive\\Documents\\VSCODE\\morswap\\node_modules\\@uniswap\\lib\\contracts\\libraries\\AddressStringUtil.sol": {
+      "lastModificationDate": 1725464280550,
+      "contentHash": "8b837fa98df3a80a4dbe6c821920023a",
+      "sourceName": "@uniswap/lib/contracts/libraries/AddressStringUtil.sol",
+      "solcConfig": {
+        "version": "0.7.6",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        ">=0.5.0"
+      ],
+      "artifacts": [
+        "AddressStringUtil"
+      ]
+    },
+    "C:\\Users\\toddz\\OneDrive\\Documents\\VSCODE\\morswap\\node_modules\\@uniswap\\v3-core\\contracts\\interfaces\\pool\\IUniswapV3PoolImmutables.sol": {
+      "lastModificationDate": 1725730109433,
+      "contentHash": "e236e09a9d654fb2f20a6da5dba2bd2f",
+      "sourceName": "@uniswap/v3-core/contracts/interfaces/pool/IUniswapV3PoolImmutables.sol",
+      "solcConfig": {
+        "version": "0.7.6",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        ">=0.5.0"
+      ],
+      "artifacts": [
+        "IUniswapV3PoolImmutables"
+      ]
+    },
+    "C:\\Users\\toddz\\OneDrive\\Documents\\VSCODE\\morswap\\node_modules\\@uniswap\\v3-core\\contracts\\interfaces\\pool\\IUniswapV3PoolState.sol": {
+      "lastModificationDate": 1725730109434,
+      "contentHash": "0488495ef9087b4513d3b43634035ef9",
+      "sourceName": "@uniswap/v3-core/contracts/interfaces/pool/IUniswapV3PoolState.sol",
+      "solcConfig": {
+        "version": "0.7.6",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        ">=0.5.0"
+      ],
+      "artifacts": [
+        "IUniswapV3PoolState"
+      ]
+    },
+    "C:\\Users\\toddz\\OneDrive\\Documents\\VSCODE\\morswap\\node_modules\\@uniswap\\v3-core\\contracts\\interfaces\\pool\\IUniswapV3PoolDerivedState.sol": {
+      "lastModificationDate": 1725730109432,
+      "contentHash": "25b71180ec9f5132a158334971ee2ace",
+      "sourceName": "@uniswap/v3-core/contracts/interfaces/pool/IUniswapV3PoolDerivedState.sol",
+      "solcConfig": {
+        "version": "0.7.6",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        ">=0.5.0"
+      ],
+      "artifacts": [
+        "IUniswapV3PoolDerivedState"
+      ]
+    },
+    "C:\\Users\\toddz\\OneDrive\\Documents\\VSCODE\\morswap\\node_modules\\@uniswap\\v3-core\\contracts\\interfaces\\pool\\IUniswapV3PoolOwnerActions.sol": {
+      "lastModificationDate": 1725730109433,
+      "contentHash": "1b06ecc79e75f836c446ccf286e671e4",
+      "sourceName": "@uniswap/v3-core/contracts/interfaces/pool/IUniswapV3PoolOwnerActions.sol",
+      "solcConfig": {
+        "version": "0.7.6",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        ">=0.5.0"
+      ],
+      "artifacts": [
+        "IUniswapV3PoolOwnerActions"
+      ]
+    },
+    "C:\\Users\\toddz\\OneDrive\\Documents\\VSCODE\\morswap\\node_modules\\@uniswap\\v3-core\\contracts\\interfaces\\pool\\IUniswapV3PoolActions.sol": {
+      "lastModificationDate": 1725730109430,
+      "contentHash": "83d338eb1394008c808a20ac7c5bab0c",
+      "sourceName": "@uniswap/v3-core/contracts/interfaces/pool/IUniswapV3PoolActions.sol",
+      "solcConfig": {
+        "version": "0.7.6",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        ">=0.5.0"
+      ],
+      "artifacts": [
+        "IUniswapV3PoolActions"
+      ]
+    },
+    "C:\\Users\\toddz\\OneDrive\\Documents\\VSCODE\\morswap\\node_modules\\@uniswap\\v3-core\\contracts\\interfaces\\pool\\IUniswapV3PoolEvents.sol": {
+      "lastModificationDate": 1725730109432,
+      "contentHash": "05abb59ec113db1046f7dadc78bb297b",
+      "sourceName": "@uniswap/v3-core/contracts/interfaces/pool/IUniswapV3PoolEvents.sol",
+      "solcConfig": {
+        "version": "0.7.6",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        ">=0.5.0"
+      ],
+      "artifacts": [
+        "IUniswapV3PoolEvents"
+      ]
+    },
+    "C:\\Users\\toddz\\OneDrive\\Documents\\VSCODE\\morswap\\node_modules\\@openzeppelin\\contracts\\token\\ERC20\\IERC20.sol": {
+      "lastModificationDate": 1725662680162,
+      "contentHash": "70ec621ea910798b6c590a0b402a5bb9",
+      "sourceName": "@openzeppelin/contracts/token/ERC20/IERC20.sol",
+      "solcConfig": {
+        "version": "0.7.6",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.7.0"
+      ],
+      "artifacts": [
+        "IERC20"
+      ]
+    },
+    "C:\\Users\\toddz\\OneDrive\\Documents\\VSCODE\\morswap\\node_modules\\base64-sol\\base64.sol": {
+      "lastModificationDate": 1725474846240,
+      "contentHash": "0d54cb6a748ddde95d92ed7802c9248d",
+      "sourceName": "base64-sol/base64.sol",
+      "solcConfig": {
+        "version": "0.7.6",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        ">=0.6.0"
+      ],
+      "artifacts": [
+        "Base64"
+      ]
+    },
+    "C:\\Users\\toddz\\OneDrive\\Documents\\VSCODE\\morswap\\node_modules\\@openzeppelin\\contracts\\utils\\Strings.sol": {
+      "lastModificationDate": 1725662680228,
+      "contentHash": "0a0b5402f31b9b60fdb741918c57247f",
+      "sourceName": "@openzeppelin/contracts/utils/Strings.sol",
+      "solcConfig": {
+        "version": "0.7.6",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.7.0"
+      ],
+      "artifacts": [
+        "Strings"
+      ]
+    },
+    "C:\\Users\\toddz\\OneDrive\\Documents\\VSCODE\\morswap\\node_modules\\@openzeppelin\\contracts\\math\\SafeMath.sol": {
+      "lastModificationDate": 1725662680220,
+      "contentHash": "871a094d6b6b4c3714946e86329f2fa2",
+      "sourceName": "@openzeppelin/contracts/math/SafeMath.sol",
+      "solcConfig": {
+        "version": "0.7.6",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.7.0"
+      ],
+      "artifacts": [
+        "SafeMath"
+      ]
+    },
+    "C:\\Users\\toddz\\OneDrive\\Documents\\VSCODE\\morswap\\node_modules\\@openzeppelin\\contracts\\math\\SignedSafeMath.sol": {
+      "lastModificationDate": 1725662680223,
+      "contentHash": "f90947ba3efcd88fec132a905c4c6b38",
+      "sourceName": "@openzeppelin/contracts/math/SignedSafeMath.sol",
+      "solcConfig": {
+        "version": "0.7.6",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.7.0"
+      ],
+      "artifacts": [
+        "SignedSafeMath"
+      ]
+    },
+    "C:\\Users\\toddz\\OneDrive\\Documents\\VSCODE\\morswap\\node_modules\\@uniswap\\v3-core\\contracts\\libraries\\TickMath.sol": {
+      "lastModificationDate": 1725730109441,
+      "contentHash": "6bd9ce5056f36b9763627bce69998c83",
+      "sourceName": "@uniswap/v3-core/contracts/libraries/TickMath.sol",
+      "solcConfig": {
+        "version": "0.7.6",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        ">=0.5.0 <0.8.0"
+      ],
+      "artifacts": [
+        "TickMath"
+      ]
+    },
+    "C:\\Users\\toddz\\OneDrive\\Documents\\VSCODE\\morswap\\node_modules\\@uniswap\\v3-periphery\\contracts\\libraries\\HexStrings.sol": {
+      "lastModificationDate": 1725555672355,
+      "contentHash": "562fe2d74458647ed8ec7bbbeece63a0",
+      "sourceName": "@uniswap/v3-periphery/contracts/libraries/HexStrings.sol",
+      "solcConfig": {
+        "version": "0.7.6",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "=0.7.6"
+      ],
+      "artifacts": [
+        "HexStrings"
+      ]
+    },
+    "C:\\Users\\toddz\\OneDrive\\Documents\\VSCODE\\morswap\\node_modules\\@uniswap\\v3-core\\contracts\\libraries\\FullMath.sol": {
+      "lastModificationDate": 1725730109426,
+      "contentHash": "c3f03759b6500f54f402f1963af1c256",
+      "sourceName": "@uniswap/v3-core/contracts/libraries/FullMath.sol",
+      "solcConfig": {
+        "version": "0.7.6",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        ">=0.4.0 <0.8.0"
+      ],
+      "artifacts": [
+        "FullMath"
+      ]
+    },
+    "C:\\Users\\toddz\\OneDrive\\Documents\\VSCODE\\morswap\\node_modules\\@uniswap\\v3-periphery\\contracts\\libraries\\NFTSVG.sol": {
+      "lastModificationDate": 1725555672376,
+      "contentHash": "f5a3ff2a3a7eb156bc90c76be943e702",
+      "sourceName": "@uniswap/v3-periphery/contracts/libraries/NFTSVG.sol",
+      "solcConfig": {
+        "version": "0.7.6",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "@openzeppelin/contracts/utils/Strings.sol",
+        "@uniswap/v3-core/contracts/libraries/BitMath.sol",
+        "base64-sol/base64.sol"
+      ],
+      "versionPragmas": [
+        ">=0.7.6"
+      ],
+      "artifacts": [
+        "NFTSVG"
+      ]
+    },
+    "C:\\Users\\toddz\\OneDrive\\Documents\\VSCODE\\morswap\\node_modules\\@uniswap\\v3-core\\contracts\\libraries\\BitMath.sol": {
+      "lastModificationDate": 1725730109424,
+      "contentHash": "81e58372a134f05eb1a211a1efef8a1e",
+      "sourceName": "@uniswap/v3-core/contracts/libraries/BitMath.sol",
+      "solcConfig": {
+        "version": "0.7.6",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        ">=0.5.0"
+      ],
+      "artifacts": [
+        "BitMath"
+      ]
+    },
+    "C:\\Users\\toddz\\OneDrive\\Documents\\VSCODE\\morswap\\contracts\\libraries\\PositionKey.sol": {
+      "lastModificationDate": 1725472524694,
+      "contentHash": "ef5df3f85e6ad441f6c96a6e465da380",
+      "sourceName": "contracts/libraries/PositionKey.sol",
+      "solcConfig": {
+        "version": "0.7.6",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "@uniswap/v3-core/contracts/interfaces/IUniswapV3Pool.sol",
+        "./PoolAddress.sol"
+      ],
+      "versionPragmas": [
+        "=0.7.6"
+      ],
+      "artifacts": [
+        "PositionKey"
+      ]
+    },
+    "C:\\Users\\toddz\\OneDrive\\Documents\\VSCODE\\morswap\\contracts\\libraries\\PoolAddress.sol": {
+      "lastModificationDate": 1725472530176,
+      "contentHash": "a1434cdf3304ad33f095bba40cda4465",
+      "sourceName": "contracts/libraries/PoolAddress.sol",
+      "solcConfig": {
+        "version": "0.7.6",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "=0.7.6"
+      ],
+      "artifacts": [
+        "PoolAddress"
+      ]
+    },
+    "C:\\Users\\toddz\\OneDrive\\Documents\\VSCODE\\morswap\\contracts\\libraries\\CallbackValidation.sol": {
+      "lastModificationDate": 1725477794196,
+      "contentHash": "d1887a38acde1e5d0f9a971a8e6a12e7",
+      "sourceName": "contracts/libraries/CallbackValidation.sol",
+      "solcConfig": {
+        "version": "0.7.6",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "@uniswap/v3-core/contracts/interfaces/IUniswapV3Pool.sol",
+        "./PoolAddress.sol"
+      ],
+      "versionPragmas": [
+        "=0.7.6"
+      ],
+      "artifacts": [
+        "CallbackValidation"
+      ]
+    },
+    "C:\\Users\\toddz\\OneDrive\\Documents\\VSCODE\\morswap\\contracts\\interfaces\\INonfungibleTokenPositionDescriptor.sol": {
+      "lastModificationDate": 1725472546243,
+      "contentHash": "cc4754b393ec96d89e59215ad41e790c",
+      "sourceName": "contracts/interfaces/INonfungibleTokenPositionDescriptor.sol",
+      "solcConfig": {
+        "version": "0.7.6",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "@uniswap/v3-core/contracts/interfaces/IUniswapV3Pool.sol",
+        "@uniswap/lib/contracts/libraries/SafeERC20Namer.sol",
+        "@uniswap/v3-periphery/contracts/libraries/ChainId.sol",
+        "@uniswap/v3-periphery/contracts/interfaces/INonfungiblePositionManager.sol",
+        "@uniswap/v3-periphery/contracts/interfaces/INonfungibleTokenPositionDescriptor.sol",
+        "@uniswap/v3-periphery/contracts/interfaces/IERC20Metadata.sol",
+        "@uniswap/v3-periphery/contracts/libraries/PoolAddress.sol",
+        "@uniswap/v3-periphery/contracts/libraries/NFTDescriptor.sol",
+        "@uniswap/v3-periphery/contracts/libraries/TokenRatioSortOrder.sol"
+      ],
+      "versionPragmas": [
+        "=0.7.6"
+      ],
+      "artifacts": [
+        "NonfungibleTokenPositionDescriptor"
+      ]
+    },
+    "C:\\Users\\toddz\\OneDrive\\Documents\\VSCODE\\morswap\\node_modules\\@uniswap\\v3-periphery\\contracts\\libraries\\TransferHelper.sol": {
+      "lastModificationDate": 1725555672409,
+      "contentHash": "f0616d1842da6584f8454c9b323d777f",
+      "sourceName": "@uniswap/v3-periphery/contracts/libraries/TransferHelper.sol",
+      "solcConfig": {
+        "version": "0.7.6",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "@openzeppelin/contracts/token/ERC20/IERC20.sol"
+      ],
+      "versionPragmas": [
+        ">=0.6.0"
+      ],
+      "artifacts": [
+        "TransferHelper"
+      ]
+    },
+    "C:\\Users\\toddz\\OneDrive\\Documents\\VSCODE\\morswap\\contracts\\TokenSwap.sol": {
+      "lastModificationDate": 1725495418492,
+      "contentHash": "b803ea444f443e09a9658c3d54a6c82f",
+      "sourceName": "contracts/TokenSwap.sol",
+      "solcConfig": {
+        "version": "0.7.6",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "@uniswap/v3-periphery/contracts/libraries/TransferHelper.sol",
+        "@uniswap/v3-periphery/contracts/interfaces/ISwapRouter.sol",
+        "@uniswap/v3-core/contracts/interfaces/IUniswapV3Factory.sol"
+      ],
+      "versionPragmas": [
+        "=0.7.6"
+      ],
+      "artifacts": [
+        "TokenSwap"
+      ]
+    },
+    "C:\\Users\\toddz\\OneDrive\\Documents\\VSCODE\\morswap\\node_modules\\@uniswap\\v3-periphery\\contracts\\interfaces\\ISwapRouter.sol": {
+      "lastModificationDate": 1725555672368,
+      "contentHash": "ffd42687b3db01d30c24213d961fcf9f",
+      "sourceName": "@uniswap/v3-periphery/contracts/interfaces/ISwapRouter.sol",
+      "solcConfig": {
+        "version": "0.7.6",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "@uniswap/v3-core/contracts/interfaces/callback/IUniswapV3SwapCallback.sol"
+      ],
+      "versionPragmas": [
+        ">=0.7.5"
+      ],
+      "artifacts": [
+        "ISwapRouter"
+      ]
+    },
+    "C:\\Users\\toddz\\OneDrive\\Documents\\VSCODE\\morswap\\node_modules\\@uniswap\\v3-core\\contracts\\interfaces\\callback\\IUniswapV3SwapCallback.sol": {
+      "lastModificationDate": 1725730109435,
+      "contentHash": "a8ba2d37b0107911ae0e3b0e123cbd83",
+      "sourceName": "@uniswap/v3-core/contracts/interfaces/callback/IUniswapV3SwapCallback.sol",
+      "solcConfig": {
+        "version": "0.7.6",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        ">=0.5.0"
+      ],
+      "artifacts": [
+        "IUniswapV3SwapCallback"
+      ]
+    },
+    "C:\\Users\\toddz\\OneDrive\\Documents\\VSCODE\\morswap\\contracts\\Lock.sol": {
+      "lastModificationDate": 1725472520371,
+      "contentHash": "fc091c966dbdb462df94969da4e9fb8b",
+      "sourceName": "contracts/Lock.sol",
+      "solcConfig": {
+        "version": "0.7.6",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "=0.7.6"
+      ],
+      "artifacts": [
+        "Lock"
+      ]
+    },
+    "C:\\Users\\toddz\\OneDrive\\Documents\\VSCODE\\morswap\\contracts\\Wrappedcontract.sol": {
+      "lastModificationDate": 1725490038809,
+      "contentHash": "213c86fb9a9060cd3de50cf1e0ae07ea",
+      "sourceName": "contracts/Wrappedcontract.sol",
+      "solcConfig": {
+        "version": "0.7.6",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "@openzeppelin/contracts/token/ERC20/IERC20.sol"
+      ],
+      "versionPragmas": [
+        "=0.7.6"
+      ],
+      "artifacts": [
+        "WETHMock"
+      ]
+    },
+    "C:\\Users\\toddz\\OneDrive\\Documents\\VSCODE\\morswap\\contracts\\base\\LiquidityManagement.sol": {
+      "lastModificationDate": 1725485334409,
+      "contentHash": "94c394d377c0630ffdc39e368d3f9e44",
+      "sourceName": "contracts/base/LiquidityManagement.sol",
+      "solcConfig": {
+        "version": "0.7.6",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "@uniswap/v3-core/contracts/interfaces/IUniswapV3Factory.sol",
+        "@uniswap/v3-core/contracts/interfaces/callback/IUniswapV3MintCallback.sol",
+        "@uniswap/v3-core/contracts/libraries/TickMath.sol",
+        "@uniswap/v3-periphery/contracts/libraries/PoolAddress.sol",
+        "@uniswap/v3-periphery/contracts/libraries/CallbackValidation.sol",
+        "@uniswap/v3-periphery/contracts/libraries/LiquidityAmounts.sol",
+        "@uniswap/v3-periphery/contracts/interfaces/IPeripheryImmutableState.sol",
+        "@uniswap/v3-periphery/contracts/interfaces/IPeripheryPayments.sol",
+        "@uniswap/v3-periphery/contracts/libraries/TransferHelper.sol"
+      ],
+      "versionPragmas": [
+        "=0.7.6"
+      ],
+      "artifacts": [
+        "LiquidityManagement"
+      ]
+    },
+    "C:\\Users\\toddz\\OneDrive\\Documents\\VSCODE\\morswap\\node_modules\\@uniswap\\v3-core\\contracts\\interfaces\\IUniswapV3Factory.sol": {
+      "lastModificationDate": 1725730109427,
+      "contentHash": "f0eeb76e5ae42bcbacc8efc10e091716",
+      "sourceName": "@uniswap/v3-core/contracts/interfaces/IUniswapV3Factory.sol",
+      "solcConfig": {
+        "version": "0.7.6",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        ">=0.5.0"
+      ],
+      "artifacts": [
+        "IUniswapV3Factory"
+      ]
+    },
+    "C:\\Users\\toddz\\OneDrive\\Documents\\VSCODE\\morswap\\node_modules\\@uniswap\\v3-periphery\\contracts\\libraries\\CallbackValidation.sol": {
+      "lastModificationDate": 1725555672354,
+      "contentHash": "f5bc5a752dc549cd04857c14ae0ad40d",
+      "sourceName": "@uniswap/v3-periphery/contracts/libraries/CallbackValidation.sol",
+      "solcConfig": {
+        "version": "0.7.6",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "@uniswap/v3-core/contracts/interfaces/IUniswapV3Pool.sol",
+        "./PoolAddress.sol"
+      ],
+      "versionPragmas": [
+        "=0.7.6"
+      ],
+      "artifacts": [
+        "CallbackValidation"
+      ]
+    },
+    "C:\\Users\\toddz\\OneDrive\\Documents\\VSCODE\\morswap\\node_modules\\@uniswap\\v3-periphery\\contracts\\libraries\\LiquidityAmounts.sol": {
+      "lastModificationDate": 1725555672370,
+      "contentHash": "e040a720fab89989a06e1e6316b51f4b",
+      "sourceName": "@uniswap/v3-periphery/contracts/libraries/LiquidityAmounts.sol",
+      "solcConfig": {
+        "version": "0.7.6",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "@uniswap/v3-core/contracts/libraries/FullMath.sol",
+        "@uniswap/v3-core/contracts/libraries/FixedPoint96.sol"
+      ],
+      "versionPragmas": [
+        ">=0.5.0"
+      ],
+      "artifacts": [
+        "LiquidityAmounts"
+      ]
+    },
+    "C:\\Users\\toddz\\OneDrive\\Documents\\VSCODE\\morswap\\node_modules\\@uniswap\\v3-core\\contracts\\interfaces\\callback\\IUniswapV3MintCallback.sol": {
+      "lastModificationDate": 1725730109428,
+      "contentHash": "1b49846c9d15506134419bb3afa18bb7",
+      "sourceName": "@uniswap/v3-core/contracts/interfaces/callback/IUniswapV3MintCallback.sol",
+      "solcConfig": {
+        "version": "0.7.6",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        ">=0.5.0"
+      ],
+      "artifacts": [
+        "IUniswapV3MintCallback"
+      ]
+    },
+    "C:\\Users\\toddz\\OneDrive\\Documents\\VSCODE\\morswap\\node_modules\\@uniswap\\v3-core\\contracts\\libraries\\FixedPoint96.sol": {
+      "lastModificationDate": 1725730109425,
+      "contentHash": "f3ab03d6bbfd7c6834ecd3fc311cb0e7",
+      "sourceName": "@uniswap/v3-core/contracts/libraries/FixedPoint96.sol",
+      "solcConfig": {
+        "version": "0.7.6",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        ">=0.4.0"
+      ],
+      "artifacts": [
+        "FixedPoint96"
+      ]
+    },
+    "C:\\Users\\toddz\\OneDrive\\Documents\\VSCODE\\morswap\\contracts\\SwapExamples.sol": {
+      "lastModificationDate": 1725494600385,
+      "contentHash": "a6dabd6a6a49c2d7d128199ccf7d2118",
+      "sourceName": "contracts/SwapExamples.sol",
+      "solcConfig": {
+        "version": "0.7.6",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "@uniswap/v3-periphery/contracts/libraries/TransferHelper.sol",
+        "@uniswap/v3-periphery/contracts/interfaces/ISwapRouter.sol"
+      ],
+      "versionPragmas": [
+        "^0.7.6"
+      ],
+      "artifacts": [
+        "SwapExamples"
+      ]
+    },
+    "C:\\Users\\toddz\\OneDrive\\Documents\\VSCODE\\morswap\\contracts\\IQuoterV2.sol": {
+      "lastModificationDate": 1725646381699,
+      "contentHash": "899de5015e15f89bda1a75a3565f1358",
+      "sourceName": "contracts/IQuoterV2.sol",
+      "solcConfig": {
+        "version": "0.7.6",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        ">=0.7.5"
+      ],
+      "artifacts": [
+        "IQuoterV2"
+      ]
+    },
+    "C:\\Users\\toddz\\OneDrive\\Documents\\VSCODE\\morswap\\contracts\\TestToken.sol": {
+      "lastModificationDate": 1725651465111,
+      "contentHash": "f7c8df3106607bb52f30a4b64afd7682",
+      "sourceName": "contracts/TestToken.sol",
+      "solcConfig": {
+        "version": "0.7.6",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "@openzeppelin/contracts/token/ERC20/ERC20.sol"
+      ],
+      "versionPragmas": [
+        "^0.7.6"
+      ],
+      "artifacts": [
+        "TestToken"
+      ]
+    },
+    "C:\\Users\\toddz\\OneDrive\\Documents\\VSCODE\\morswap\\node_modules\\@openzeppelin\\contracts\\token\\ERC20\\ERC20.sol": {
+      "lastModificationDate": 1725662680079,
+      "contentHash": "52659a61e7fb46afdc3d0f00c3a87da6",
+      "sourceName": "@openzeppelin/contracts/token/ERC20/ERC20.sol",
+      "solcConfig": {
+        "version": "0.7.6",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "../../utils/Context.sol",
+        "./IERC20.sol",
+        "../../math/SafeMath.sol"
+      ],
+      "versionPragmas": [
+        "^0.7.0"
+      ],
+      "artifacts": [
+        "ERC20"
+      ]
+    },
+    "C:\\Users\\toddz\\OneDrive\\Documents\\VSCODE\\morswap\\node_modules\\@openzeppelin\\contracts\\utils\\Context.sol": {
+      "lastModificationDate": 1725662680056,
+      "contentHash": "2adbd82f6d055a4751566d4671512b03",
+      "sourceName": "@openzeppelin/contracts/utils/Context.sol",
+      "solcConfig": {
+        "version": "0.7.6",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        ">=0.6.0 <0.8.0"
+      ],
+      "artifacts": [
+        "Context"
+      ]
+    },
+    "C:\\Users\\toddz\\OneDrive\\Documents\\VSCODE\\morswap\\contracts\\IUniversalRouter.sol": {
+      "lastModificationDate": 1725654132167,
+      "contentHash": "6dd273e9614f63552f9a55283ee86f98",
+      "sourceName": "contracts/IUniversalRouter.sol",
+      "solcConfig": {
+        "version": "0.7.6",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.7.6"
+      ],
+      "artifacts": [
+        "IUniversalRouter"
+      ]
+    },
+    "C:\\Users\\toddz\\OneDrive\\Documents\\VSCODE\\morswap\\node_modules\\@uniswap\\v3-periphery\\contracts\\interfaces\\IQuoter.sol": {
+      "lastModificationDate": 1725555672366,
+      "contentHash": "fe8b4279fc6b913c2b33c72db1ed3eb1",
+      "sourceName": "@uniswap/v3-periphery/contracts/interfaces/IQuoter.sol",
+      "solcConfig": {
+        "version": "0.7.6",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        ">=0.7.5"
+      ],
+      "artifacts": [
+        "IQuoter"
+      ]
+    },
+    "C:\\Users\\toddz\\OneDrive\\Documents\\VSCODE\\morswap\\node_modules\\@uniswap\\v3-periphery\\contracts\\interfaces\\IQuoterV2.sol": {
+      "lastModificationDate": 1725555672367,
+      "contentHash": "d05ab58d7d5c927c5eb205eb7179d13a",
+      "sourceName": "@uniswap/v3-periphery/contracts/interfaces/IQuoterV2.sol",
+      "solcConfig": {
+        "version": "0.7.6",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        ">=0.7.5"
+      ],
+      "artifacts": [
+        "IQuoterV2"
+      ]
+    }
+  }
+}
