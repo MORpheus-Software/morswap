@@ -88,7 +88,7 @@ export async function performSwap(walletClient, amountInString, tokenIn, tokenOu
   const maxFeePerGas = feeData.lastBaseFeePerGas.mul(2).add(feeData.maxPriorityFeePerGas);
   console.log("Calculated max fee per gas:", ethers.utils.formatUnits(maxFeePerGas, "gwei"), "gwei");
 
-  // Estimate gas limit
+  // Estimate the gas limit
   let estimatedGasLimit;
   try {
     estimatedGasLimit = await estimateGas(signer, swapRouter02, params);
