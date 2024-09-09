@@ -19,7 +19,7 @@ function TestingInstructions() {
 
         </li>
         <li>Connect your wallet using the "Connect Wallet" button on the top right corner.</li>
-        <li>Ensure you have some testnet (MOR, ETH) in your wallet. if you don't saMOR can be found at <a href="https://morfaucet.xyz/" target="_blank"> MorFaucet.xyz </a>  and saETH can 
+        <li>Ensure you have some testnet (MOR, ETH) in your wallet. If you don't, saMOR can be found at <a href="https://morfaucet.xyz/" target="_blank"> MorFaucet.xyz </a>  and saETH can 
         be found at <a href="https://faucets.chain.link/sepolia" target="_blank"> faucets.chain.link/sepolia </a> This is my favorite faucet.</li>
         <li> <b>Before you Swap:</b> For right now, you must first wrap your ETH into the mockWETH that I created. You can do this with the buttons <b>Wrap</b> and <b>Unwrap</b> below. This will Wrap/Unwrap any desired amount of ETH/WETH at a time, Uniswap does take care of this though Multi-Hop Swaps which I plan to incorporate very soon. The address for my mockWETH is <b>0x9F220B916edDcD745F9547f2D5cd5D06F40d1B6E</b> Please add this token to your wallet</li>
         <li><b>Please be aware due to a lack of funds the pool has very low liquidity, so please try and swap small amounts such as 0.0001 MOR and 0.000001 WETH</b>. Alternitively if you would like to donate some funds to the pool After wrapping some ETH below, you can do so by clicking add Liqudity. This will add a fixed 1000 MOR to 1 WETH ratio to the pool </li> 
