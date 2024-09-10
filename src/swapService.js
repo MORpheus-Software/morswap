@@ -12,7 +12,7 @@ async function estimateGas(signer, swapRouter02, params) {
     return gasEstimate.mul(120).div(100); // Add 20% buffer
   } catch (error) {
     console.error("Error estimating gas:", error.message);
-    return ethers.BigNumber.from(1000000); // Fallback to the default value if gas estimation fails
+    return ethers.BigNumber.from(1000000); // Fallback to a default value
   }
 }
 
