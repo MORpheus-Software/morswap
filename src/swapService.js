@@ -11,9 +11,8 @@ async function estimateGas(signer, swapRouter02, params) {
     const gasEstimate = await swapRouter02.estimateGas.exactInputSingle(params);
     return gasEstimate.mul(120).div(100); // Add 20% buffer
   } catch (error) {
-    console.error("Error estimating gas:", error);
-    console.error("Params:", params);
-    throw error;
+    console.error("Error estimating gas:", error.message);
+    return ethers.BigNumber.from(1000000); // Fallback to the default value if gas estimation fails
   }
 }
 
@@ -65,9 +64,6 @@ export async function performSwap(walletClient, amountInString, tokenIn, tokenOu
   console.log("Pool liquidity:", ethers.utils.formatEther(liquidity));
 
   // Prepare swap parameters
-  const slippageTolerance = 100; // 1%
-  const minOut = amountIn.mul(10000 - slippageTolerance).div(10000);
-
   const params = {
     tokenIn: tokenIn,
     tokenOut: tokenOut,
@@ -75,7 +71,7 @@ export async function performSwap(walletClient, amountInString, tokenIn, tokenOu
     recipient: address,
     deadline: Math.floor(Date.now() / 1000) + 60 * 20,
     amountIn: amountIn,
-    amountOutMinimum: minOut,
+    amountOutMinimum: 0, // Risky!
     sqrtPriceLimitX96: 0 // No price limit set
   };
 
@@ -88,20 +84,13 @@ export async function performSwap(walletClient, amountInString, tokenIn, tokenOu
   const maxFeePerGas = feeData.lastBaseFeePerGas.mul(2).add(feeData.maxPriorityFeePerGas);
   console.log("Calculated max fee per gas:", ethers.utils.formatUnits(maxFeePerGas, "gwei"), "gwei");
 
-  // Estimate the gas limit
-  let estimatedGasLimit;
-  try {
-    estimatedGasLimit = await estimateGas(signer, swapRouter02, params);
-    console.log("Estimated gas limit:", estimatedGasLimit.toString());
-  } catch (error) {
-    console.error("Failed to estimate gas. Using default value.");
-    estimatedGasLimit = ethers.BigNumber.from(500000); // increased default value
-  }
+  // Estimate gas limit
+  const estimatedGasLimit = await estimateGas(signer, swapRouter02, params);
+  console.log("Estimated gas limit:", estimatedGasLimit.toString());
 
   // Execute the swap
   try {
     console.log("Executing swap...");
-    console.log("Swap parameters:", params);
     const tx = await swapRouter02.exactInputSingle(params, {
       maxFeePerGas: maxFeePerGas,
       maxPriorityFeePerGas: feeData.maxPriorityFeePerGas,
@@ -120,19 +109,12 @@ export async function performSwap(walletClient, amountInString, tokenIn, tokenOu
 
     return receipt;
   } catch (error) {
-    console.error("Swap failed:", error);
+    console.error("Swap failed:", error.message);
     if (error.transaction) {
       console.error("Transaction data:", error.transaction.data);
     }
     if (error.receipt) {
       console.error("Transaction receipt:", error.receipt);
-    }
-    // Try to get more information about the error
-    try {
-      const code = await provider.call(error.transaction, error.receipt.blockNumber);
-      console.error("Revert reason:", ethers.utils.toUtf8String("0x" + code.slice(138)));
-    } catch (decodeError) {
-      console.error("Failed to decode error:", decodeError);
     }
     throw error;
   }
