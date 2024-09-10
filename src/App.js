@@ -13,112 +13,50 @@ import { Link, Routes, Route, useLocation } from 'react-router-dom';
 import TestingInstructions from './testinginstructions'; 
 
 import { TOKEN_DATA } from './token_data';
+import { useQuoteInfo } from './QuoteInfo';
 
 function App() {
   const [sellAmount, setSellAmount] = useState('');
   const [buyAmount, setBuyAmount] = useState('');
-  const [priceInEth, setPriceInEth] = useState(null);
-  const [ethPriceInUSD, setEthPriceInUSD] = useState(null);
-  const [loading, setLoading] = useState(false);
+  const [calculatedBuyAmount, setCalculatedBuyAmount] = useState('');
   const [selectedSellToken, setSelectedSellToken] = useState(TOKEN_DATA['MOR']);
   const [selectedBuyToken, setSelectedBuyToken] = useState(TOKEN_DATA['WETH']);
   const [activeInput, setActiveInput] = useState('sell');
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const { address } = useAccount();
   const { data: walletClient } = useWalletClient();
   const addRecentTransaction = useAddRecentTransaction();
 
-  const provider = new ethers.providers.JsonRpcProvider('https://arb1.arbitrum.io/rpc');
-  const QUOTE_CONTRACT_ADDRESS = '0x2779a0CC1c3e0E44D2542EC3e79e3864Ae93Ef0B';
+  const { priceInEth, ethPriceInUSD, quoteLoading, error: quoteError, fetchPrices, calculateUsdValue, calculatedPrice } = useQuoteInfo(
+    selectedSellToken,
+    selectedBuyToken,
+    sellAmount,
+    buyAmount,
+    activeInput
+  );
 
   useEffect(() => {
-    fetchEthPriceInUSD();
-  }, [selectedBuyToken]);
-
-  useEffect(() => {
-    if (activeInput === 'sell' && sellAmount) {
-      fetchPrices('sell');
-    } else if (activeInput === 'buy' && buyAmount) {
-      fetchPrices('buy');
+    if (calculatedPrice && !isNaN(parseFloat(calculatedPrice))) {
+      setCalculatedBuyAmount(calculatedPrice);
+      setError(null);
+    } else if (calculatedPrice === null) {
+      setError('Failed to fetch price: Invalid price returned');
+      setCalculatedBuyAmount('');
     }
-  }, [sellAmount, buyAmount, selectedSellToken, selectedBuyToken, activeInput]);
+  }, [calculatedPrice]);
 
-  const fetchEthPriceInUSD = async () => {
-    try {
-      const usdcToken = new Token(42161, TOKEN_DATA['USDC'].address, TOKEN_DATA['USDC'].decimals, 'USDC', 'USD Coin');
-      const ethToken = new Token(42161, selectedBuyToken.address, selectedBuyToken.decimals, selectedBuyToken.symbol, 'Wrapped Ether');
-
-      const poolAddress = computePoolAddress({
-        factoryAddress: '0x248AB79Bbb9bC29bB72f7Cd42F17e054Fc40188e',
-        tokenA: usdcToken,
-        tokenB: ethToken,
-        fee: 3000,
-      });
-
-      const quoterContract = new ethers.Contract(QUOTE_CONTRACT_ADDRESS, Quoter.abi, provider);
-      const quotedAmountOut = await quoterContract.callStatic.quoteExactInputSingle(
-        ethToken.address,
-        usdcToken.address,
-        3000,
-        ethers.utils.parseUnits('1', ethToken.decimals),
-        0
-      );
-
-      const ethToUsdPrice = parseFloat(ethers.utils.formatUnits(quotedAmountOut, usdcToken.decimals));
-      setEthPriceInUSD(ethToUsdPrice);
-    } catch (error) {
-      console.error('Error fetching ETH price in USD:', error);
-    }
-  };
-
-  const fetchPrices = async (direction) => {
-    setLoading(true);
-  
-    try {
-      const sellToken = new Token(42161, selectedSellToken.address, selectedSellToken.decimals, selectedSellToken.symbol, `${selectedSellToken.symbol} Token`);
-      const buyToken = new Token(42161, selectedBuyToken.address, selectedBuyToken.decimals, selectedBuyToken.symbol, `${selectedBuyToken.symbol} Token`);
-  
-      const quoterContract = new ethers.Contract(QUOTE_CONTRACT_ADDRESS, Quoter.abi, provider);
-      
-      let quotedAmountOut;
-      if (direction === 'sell') {
-        const parsedSellAmount = ethers.utils.parseUnits(sellAmount || '1', sellToken.decimals);
-        quotedAmountOut = await quoterContract.quoteExactInputSingle.staticCall(
-          sellToken.address,
-          buyToken.address,
-          3000,
-          parsedSellAmount,
-          0
-        );
-        const price = parseFloat(ethers.utils.formatUnits(quotedAmountOut, buyToken.decimals));
-        setPriceInEth(isNaN(price) || price === 0 ? 0 : price);
-        setBuyAmount(price.toFixed(6));
-      } else {
-        const parsedBuyAmount = ethers.utils.parseUnits(buyAmount || '1', buyToken.decimals);
-        quotedAmountOut = await quoterContract.quoteExactOutputSingle.staticCall(
-          sellToken.address,
-          buyToken.address,
-          3000,
-          parsedBuyAmount,
-          ethers.constants.MaxUint256
-        );
-        const price = parseFloat(ethers.utils.formatUnits(quotedAmountOut, sellToken.decimals));
-        setPriceInEth(isNaN(price) || price === 0 ? 0 : 1 / price);
-        setSellAmount(price.toFixed(6));
-      }
-  
-    } catch (error) {
-      console.error('Error fetching price:', error);
-      // You might want to set an error state here to display to the user
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const handleSellInputChange = (e) => {
-    setSellAmount(e.target.value);
+  const handleSellInputChange = useCallback((e) => {
+    const newSellAmount = e.target.value;
+    setSellAmount(newSellAmount);
     setActiveInput('sell');
-  };
+    if (newSellAmount && parseFloat(newSellAmount) > 0) {
+      fetchPrices('sell');
+    } else {
+      setCalculatedBuyAmount('0');
+    }
+  }, [fetchPrices]);
 
   const handleBuyInputChange = (e) => {
     setBuyAmount(e.target.value);
@@ -136,34 +74,12 @@ function App() {
     }
   };
 
-  const calculateUsdValue = useCallback((amount, token) => {
-    if (!priceInEth || !ethPriceInUSD) return '0.00';
-  
-    let tokenPriceInUsd;
-  
-    if (token.symbol === 'USDC') {
-      // If selling USDC, the USD value is just the sell amount
-      tokenPriceInUsd = 1; // 1 USDC = 1 USD
-    } else if (token.symbol === 'WETH') {
-      // If selling WETH, the USD value is sellAmount * ethPriceInUSD
-      tokenPriceInUsd = ethPriceInUSD;
-    } else {
-      // For other tokens, convert the token price in ETH to USD
-      tokenPriceInUsd = priceInEth * ethPriceInUSD;
-    }
-  
-    return (amount * tokenPriceInUsd).toFixed(2);
-  }, [priceInEth, ethPriceInUSD]);
-
   const handleSwapTokens = () => {
     setSelectedSellToken(selectedBuyToken);
     setSelectedBuyToken(selectedSellToken);
     setSellAmount(buyAmount);
     setBuyAmount(sellAmount);
     setActiveInput(activeInput === 'sell' ? 'buy' : 'sell');
-    setTimeout(() => {
-      fetchPrices(activeInput === 'sell' ? 'buy' : 'sell');
-    }, 0);
   };
 
   const handleSwap = async () => {
@@ -177,7 +93,7 @@ function App() {
       console.log(`Swapping ${sellAmount} ${selectedSellToken.symbol} for ${selectedBuyToken.symbol}`);
       const receipt = await performSwap(
         walletClient, 
-        sellAmount, // Make sure this is a string representing the exact amount
+        sellAmount,
         selectedSellToken.address, 
         selectedBuyToken.address
       );
@@ -189,7 +105,6 @@ function App() {
       });
 
       alert('Swap successful!');
-      // Refresh balances and prices here
       fetchPrices(activeInput);
     } catch (error) {
       console.error('Swap failed:', error);
@@ -198,8 +113,6 @@ function App() {
       setLoading(false);
     }
   };
-
-  const location = useLocation();
 
   const renderSwapInterface = () => (
     <div className="swap-container">
@@ -262,8 +175,9 @@ function App() {
               type="number"
               id="buyAmount"
               placeholder="0"
-              value={buyAmount}
+              value={activeInput === 'sell' ? (parseFloat(sellAmount) > 0 ? calculatedBuyAmount : '0') : buyAmount}
               onChange={handleBuyInputChange}
+              readOnly={activeInput === 'sell'}
             />
             <div className={`usd-value ${loading ? 'blur-text' : ''}`}>
               {loading ? '' : `$${calculateUsdValue(buyAmount, selectedBuyToken)}`}
@@ -273,13 +187,17 @@ function App() {
       </div>
 
       <div className="price-display">
-        {loading
+        {loading || quoteLoading
           ? 'Loading price...'
-          : `1 ${selectedSellToken.symbol} = ${priceInEth ? parseFloat(priceInEth).toFixed(6) : 'N/A'} ${selectedBuyToken.symbol}`}
+          : error
+          ? `Error: ${error}`
+          : sellAmount && parseFloat(sellAmount) > 0 && calculatedBuyAmount && !isNaN(parseFloat(calculatedBuyAmount))
+          ? `${sellAmount} ${selectedSellToken.symbol} = ${parseFloat(calculatedBuyAmount).toFixed(8)} ${selectedBuyToken.symbol}`
+          : 'Enter an amount to see the conversion'}
       </div>
 
       <div className="button-container">
-        <button onClick={handleSwap} disabled={!address || loading}>
+        <button onClick={handleSwap} disabled={!address || loading || quoteLoading}>
           {loading ? 'Swapping...' : 'Swap'}
         </button>
         <Link to="/testing-instructions" className="testing-link">
