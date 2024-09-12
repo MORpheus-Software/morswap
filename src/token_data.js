@@ -9,11 +9,11 @@ export const TOKEN_DATA = {
       symbol: 'WETH',
       decimals: 18,
    },
-   // USDC: {
-      //address: '0xaf88d065e77c8cC2239327C5EDb3A432268e5831',
-      //symbol: 'USDC',
-      //decimals: 6,
-   // },
+    //USDC: {
+    //  address: '0xaf88d065e77c8cC2239327C5EDb3A432268e5831',
+    //  symbol: 'USDC',
+    //  decimals: 6,
+    //},
     //LDO: {
      // address: '0x13Ad51ed4F1B7e9Dc168d8a00cB3f4dDD85EfA60',
      // symbol: 'LDO',
