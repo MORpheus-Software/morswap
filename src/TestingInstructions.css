@@ -195,3 +195,80 @@
 
     
   }
+
+  /* New mobile-specific styles */
+  @media (max-width: 767px) {
+    .testing-instructions {
+      padding: 15px;
+      margin: 0 10px;
+    }
+
+    .testing-instructions h1 {
+      font-size: 20px;
+      margin-bottom: 15px;
+    }
+
+    .testing-instructions p {
+      font-size: 14px;
+      line-height: 1.4;
+      margin-bottom: 12px;
+    }
+
+    .testing-instructions ul {
+      padding-left: 15px;
+    }
+
+    .testing-instructions li {
+      margin-bottom: 8px;
+      font-size: 14px;
+    }
+
+    .back-to-swap {
+      padding: 8px 15px;
+      font-size: 14px;
+    }
+
+    .wrap-eth,
+    .unwrap-weth,
+    .add-liquidity {
+      padding: 6px;
+      margin-top: 15px;
+      margin-bottom: 15px;
+      width: 95%;
+    }
+
+    .wrap-eth h2,
+    .unwrap-weth h2,
+    .add-liquidity h2 {
+      font-size: 16px;
+      margin-bottom: 8px;
+      width: 90%;
+    }
+
+    .wrap-eth input,
+    .unwrap-weth input,
+    .add-liquidity input {
+      width: 95%;
+      padding: 6px;
+      font-size: 14px;
+    }
+
+    .wrap-eth button,
+    .unwrap-weth button,
+    .add-liquidity button {
+      width: 100%;
+      padding: 6px 12px;
+      font-size: 14px;
+    }
+
+    .error,
+    .success {
+      font-size: 12px;
+      margin-top: 6px;
+    }
+
+    .add-liquidity p {
+      font-size: 14px;
+      margin-bottom: 6px;
+    }
+  }

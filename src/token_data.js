@@ -1,12 +1,17 @@
+import morLogo from './Assets/morlogo.png';
+import wethLogo from './Assets/wethlogo.png';
+
 export const TOKEN_DATA = {
     MOR: {
       address: '0xc1664f994Fd3991f98aE944bC16B9aED673eF5fD', 
       symbol: 'MOR',
+      icon: morLogo,
       decimals: 18,
     },
     WETH: {
       address: '0x9F220B916edDcD745F9547f2D5cd5D06F40d1B6E', 
       symbol: 'WETH',
+      icon: wethLogo,
       decimals: 18,
    },
     //USDC: {
@@ -31,3 +36,6 @@ export const TOKEN_DATA = {
     //},
    // Add more tokens here
   };
+
+// Helper function to get icon
+export const getTokenIcon = (symbol) => TOKEN_DATA[symbol]?.icon || wethLogo;

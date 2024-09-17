@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { useAccount, useWalletClient } from 'wagmi';
 import { ethers } from 'ethers';
 import { Token } from '@uniswap/sdk-core';
@@ -8,14 +8,80 @@ import Quoter from '@uniswap/v3-periphery/artifacts/contracts/lens/Quoter.sol/Qu
 import './App.css';
 import { performSwap } from './SwapService';
 import { useAddRecentTransaction } from '@rainbow-me/rainbowkit';
+import { RainbowKitProvider, darkTheme, Theme } from '@rainbow-me/rainbowkit';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { Link, Routes, Route, useLocation } from 'react-router-dom';
 import TestingInstructions from './testinginstructions'; 
-
 import { TOKEN_DATA } from './token_data';
 import { useQuoteInfo } from './QuoteInfo';
+import { infinity } from 'ldrs';
+
+infinity.register();
+
+function LoadingAnimation({ onAnimationComplete }) {
+  const loaderRef = useRef(null);
+
+  useEffect(() => {
+    const loader = loaderRef.current;
+    if (!loader) return;
+
+    const animationDuration = 2000; // 2 seconds total
+    const startTime = Date.now();
+
+    const animate = () => {
+      const elapsedTime = Date.now() - startTime;
+      const progress = Math.min(elapsedTime / animationDuration, 1);
+
+      if (progress < 0.4) {
+        // Keep stroke length at 0.15 for the first 40% of the animation
+        loader.setAttribute('stroke-length', '0.15');
+      } else if (progress < 0.5) {
+        // Expand stroke length from 0.15 to 1 over 10% of the animation
+        const strokeLength = 0.15 + (1 - 0.15) * ((progress - 0.4) / 0.1);
+        loader.setAttribute('stroke-length', strokeLength.toString());
+      } else if (progress < 0.6) {
+        // Keep stroke length at 1 and color at white for a shorter time
+        loader.setAttribute('stroke-length', '1');
+        loader.setAttribute('color', 'white');
+      } else if (progress < 0.7) {
+        // Change color from white to the specific green over 10% of the animation
+        const colorProgress = (progress - 0.6) / 0.1; // Normalize to 0-1 range
+        const r = Math.round(255 - (255 - 98) * colorProgress);
+        const g = Math.round(255 - (255 - 255) * colorProgress);
+        const b = Math.round(108 * colorProgress);
+        loader.setAttribute('color', `rgb(${r}, ${g}, ${b})`);
+      } else {
+        // Keep color at the specific green for the rest of the animation
+        loader.setAttribute('color', 'rgb(98, 255, 108)');
+      }
+
+      if (progress < 1) {
+        requestAnimationFrame(animate);
+      } else {
+        onAnimationComplete();
+      }
+    };
+
+    requestAnimationFrame(animate);
+  }, [onAnimationComplete]);
+
+  return (
+    <div className="loader-container">
+      <l-infinity
+        ref={loaderRef}
+        size="65"
+        stroke="6"
+        stroke-length="0.15"
+        bg-opacity="0.1"
+        speed="0.6" 
+        color="white" 
+      ></l-infinity>
+    </div>
+  );
+}
 
 function App() {
+  const [initialLoading, setInitialLoading] = useState(true);
   const [sellAmount, setSellAmount] = useState('');
   const [buyAmount, setBuyAmount] = useState('');
   const [calculatedBuyAmount, setCalculatedBuyAmount] = useState('');
@@ -36,6 +102,10 @@ function App() {
     buyAmount,
     activeInput
   );
+
+  const handleAnimationComplete = useCallback(() => {
+    setInitialLoading(false);
+  }, []);
 
   useEffect(() => {
     if (calculatedPrice && !isNaN(parseFloat(calculatedPrice))) {
@@ -206,6 +276,10 @@ function App() {
       </div>
     </div>
   );
+
+  if (initialLoading) {
+    return <LoadingAnimation onAnimationComplete={handleAnimationComplete} />;
+  }
 
   return (
     <div className="container">

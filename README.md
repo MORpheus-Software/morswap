@@ -1,16 +1,39 @@
 # Testing Instructions
 
-Welcome to the **MorSwap** testing page. Follow these instructions to test the swap functionality:
+Welcome to the **MorSwap** testing page. Follow these instructions to **locally test** the swap functionality:
 
+1. **Clone this repository:**
+   ```bash
+   git clone https://github.com/MORpheus-Software/morswap.git
+
+   git checkout development
+   ```
+
+2. **Install dependencies:**
+   ```bash
+   
+   npm install --legacy-peer-deps
+   ```
+
+3. **Start the local development server:**
+   ```bash
+   npm start
+   ```
+
+4. **If you see Source Map errors**
+    create a .env file in the main morswap directory.
+    
+    Locate the file morswap/.env-example.
+
+    copy the contents of this file into the .env file you created.
+
+    the server should work without api keys, but if you run into issues you may need to aquire one @ https://www.alchemy.com/ make sure this key is for the **arbitrum sepolia network.**
+
+    Once you have done this, copy the API key into the .env file **ENTERAPIKEYHERE**.
+---
 ---
 
-Thank you so much for testing! Please note that although this is a testing site, I have done everything I can to ensure you are unable to connect to any Main networks. **Please take a moment to ensure you are using the Arbitrum Sepolia network.** You can check this by clicking the network name at the top of the page.
-
-While this is a testing site, please be aware that there are still risks involved with the loss of testnet funds. **Please double-check every transaction** through MetaMask and the browser console.
-
----
-
-### Steps to Test MorSwap:
+### Steps to Test Swapping:
 
 1. **Connect Your Wallet:**
    - Click the **"Connect Wallet"** button on the top right corner of the page.

@@ -1,10 +1,27 @@
+.loader-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #2D2D2D;
+}
+
+.container {
+  animation: fade-in 0.2s;
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
 /* General Body Styles */
 body {
   margin: 0;
   padding: 0;
-  background-color: #2D2D2D; /* Dark background */
+  background-color: #2D2D2D;
   color: #fff;
-  font-family: Arial, sans-serif; /* Main font */
+  font-family: Arial, sans-serif;
 }
 
 /* RainbowKit Customization */
@@ -42,23 +59,7 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 10px; /* Adjust as needed */
-}
-
-.token-selector select {
-  /* Add any specific styles for the select element */
-}
-
-.token-selector span {
-  /* Add any specific styles for the balance span */
-}
-
-.token-selector {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  margin-bottom: 0px;
-  margin-top: 0px; /* Add some top margin to make room for the label */
+  margin-bottom: 10px;
 }
 
 .token-selector select {
@@ -67,12 +68,12 @@ body {
   color: #fff;
   padding: 0px;
   margin-right: 0px;
-  margin-top: 5px; 
+  margin-top: 15px;
   border-radius: 5px;
 }
 
 .token-selector span {
-  color: #005306; 
+  color: #005306;
   font-size: 0.9rem;
   text-align: left;
   margin-right: 10px;
@@ -118,7 +119,7 @@ body {
   color: #4CAF50;
   cursor: pointer;
   border-radius: 8px;
-  font-weight: bold; 
+  font-weight: bold;
 }
 
 .swap-container {
@@ -177,7 +178,7 @@ body {
 /* USD value below input field */
 .usd-value {
   font-size: 12px;
-  color: #b8b8b8; 
+  color: #b8b8b8;
   position: absolute;
   bottom: -20px; /* Position below the input */
   left: 22px;
@@ -204,7 +205,7 @@ body {
 }
 
 .swap-box span {
-  margin-left: 25px; 
+  margin-left: 25px;
   margin-top: 5px;
   font-size: 10px;
 }
@@ -240,7 +241,7 @@ body {
   background-color: #387a3a;
   color: white;
   border: none;
-  border-radius: 50%;
+  border-radius: 20%;
   width: 40px;
   height: 40px;
   font-size: 24px; /* Increased font size for better visibility */
@@ -264,11 +265,16 @@ body {
 
 .input-label {
   position: absolute;
-  top: 5px;
-  left: 10px;
-  font-size: 14px;
-  color: #387a3a;
+  top: -20px;
+  left: -30%;
+  font-size: 12px;
+  color: #cecece;
   font-weight: bold;
+}
+
+.swap-section {
+  position: relative;
+  margin-bottom: 0px;
 }
 
 .button-container {
@@ -307,4 +313,111 @@ body {
 
 .testing-link {
   text-decoration: none;
+}
+
+/* Mobile-specific styles */
+@media (max-width: 767px) {
+  /* Header adjustments for mobile */
+  .header {
+    flex-direction: row;
+    align-items: center;
+    padding: 5px 10px; /* Smaller padding */
+  }
+
+  .logo {
+    margin-bottom: 5px;
+  }
+
+  .swap-btn, .Projects {
+    font-size: 14px; 
+    padding: 3px 8px; 
+  }
+
+  .wallet-button button {
+    padding: 5px 10px; 
+    font-size: 14px; 
+  }
+
+  /* Swap container adjustments for mobile */
+  .swap-container {
+    width: 95%;
+    padding-top: 40px; 
+  }
+
+  /* Swap box adjustments for mobile */
+  .swap-box {
+    width: 80%;
+    transform: none;
+    height: 55px; 
+  }
+
+  /* Input field adjustments for mobile */
+  .swap-box input {
+    font-size: 25px; 
+    margin-left: 0;
+    width: 100%;
+    height: 40px; 
+  }
+
+  /* Token selector adjustments for mobile */
+  .token-selector {
+    flex-direction: row; 
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+
+  .token-selector select {
+    width: auto;
+    margin-bottom: 5px;
+    font-size: 14px; 
+    height: 100%;
+  }
+  .input-label {
+      top: 0px;
+      font-size: 12px;
+  }
+  
+  .swap-section {
+      margin-bottom: 0px;
+    
+  }
+  .token-selector span {
+    transform: none;
+    font-size: 12px; 
+  }
+
+  /* USD value adjustments for mobile */
+  .usd-value {
+    font-size: 10px; 
+    bottom: -15px; 
+  }
+
+  .price-display {
+    font-size: 14px; 
+  }
+
+  /* Swap tokens button adjustments for mobile */
+  .swap-tokens-button {
+    width: 30px; 
+    height: 30px; 
+    font-size: 18px; 
+  }
+
+  /* Button container adjustments for mobile */
+  .button-container {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .button-container button {
+    width: 100%;
+    font-size: 14px; 
+    padding: 8px 15px; 
+  }
+
+  /* Input label adjustments for mobile */
+  .input-label {
+    font-size: 12px; 
+  }
 }
